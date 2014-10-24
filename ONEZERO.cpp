@@ -1,22 +1,162 @@
+//Includes
+#include <vector>
+#include <queue>
+#include <map>
+#include <set>
+#include <utility> //Pair
+#include <algorithm>
+#include <sstream> // istringstream>> ostring stream<<
+#include <iostream>
+#include <iomanip>
+#include <cstdio>
+#include <cmath>
+#include <cstdlib>
+#include <cassert>
+#include <ctime>
+#include <cstring>
+#include <limits>
+#include <list>
+#include <string>
+using namespace std;
+ 
+//M lazy ;)
+#define ll long long
+typedef vector <int> vi;
+typedef pair< int ,int > pii;
+typedef istringstream iss;
+typedef ostringstream oss;
 
+#define pb push_back
+#define mp make_pair
+#define ff first
+#define ss second
+#define sz size()
+#define ln length()
+#define rep(i,n) for(int i=0;i<n;i++)
+#define fu(i,a,n) for(int i=a;i<=n;i++)
+#define fd(i,n,a) for(int i=n;i>=a;i--)
+#define all(a) a.begin(),a.end()
+#define ESP (1e-9)
+ 
+#define gi(n) scanf("%d",&n)
+#define gl(n) cin >> n
+#define pi(n) printf("%d",n)
+#define pl(n) cout << n
+#define ps printf(" ")
+#define pn printf("\n")
+#define dg(n,s); printf("%s %d",s,n)
+#define imax numeric_limits<int>::max()
+#define imin numeric_limits<int>::min()
+#define lmax numeric_limits<ll>::max()
+#define lmin numeric_limits<ll>::min()
+ 
+void assertOO(int a, int n, int b) {
+    assert( a <= n && n <= b );
+}
 
-<html><head><meta http-equiv='Content-Type' content='text/html; charset=iso-8859-2'><title>SPOJ submission 12607456 (C++ 4.3.2)</title><style type='text/css'><!--/* GeSHi (c) Nigel McNie 2004 (http://qbnz.com/highlighter) */
-.cpp  {color: #000066; border: 1px solid #d0d0d0; background-color: #f0f0f0;}
-.cpp a:link {color: #000060;}
-.cpp a:hover {background-color: #f0f000;}
-.cpp .head {font-family: Verdana, Arial, sans-serif; color: #808080; font-size: 70%; font-weight: bold; background-color: #f0f0ff; border-bottom: 1px solid #d0d0d0; padding: 2px;}
-.cpp .imp {font-weight: bold; color: red;}
-.cpp .kw1 {color: #0000ff;}
-.cpp .kw2 {color: #0000ff;}
-.cpp .kw3 {color: #0000dd;}
-.cpp .kw4 {color: #0000ff;}
-.cpp .co1 {color: #ff0000;}
-.cpp .co2 {color: #339900;}
-.cpp .coMULTI {color: #ff0000; font-style: italic;}
-.cpp .es0 {color: #666666; font-weight: bold;}
-.cpp .br0 {color: #000000;}
-.cpp .st0 {color: #666666;}
-.cpp .nu0 {color: #0000dd;}
-.cpp .me1 {color: #00eeff;}
-.cpp .me2 {color: #00eeff;}
---></style></head><body><pre class="cpp"><div class="head">SPOJ submission 12607456 (C++ 4.3.2) <a href='/files/src/save/12607456'>plaintext</a> <a href='/status/ONEZERO,samprit/'>list</a>. Status: AC, problem ONEZERO, contest SPOJ. By samprit (Samprit Biswas), 2014-10-12 15:30:50.</div><ol><li><div class="de1"><span class="co1">//Includes</span></div></li><li><div class="de1"><span class="co2">#include &lt;vector&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;queue&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;map&gt;</span></div></li><li class="li2"><div class="de2"><span class="co2">#include &lt;set&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;utility&gt; //Pair</span></div></li><li><div class="de1"><span class="co2">#include &lt;algorithm&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;sstream&gt; // istringstream&gt;&gt; ostring stream&lt;&lt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;iostream&gt;</span></div></li><li class="li2"><div class="de2"><span class="co2">#include &lt;iomanip&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;cstdio&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;cmath&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;cstdlib&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;cassert&gt;</span></div></li><li class="li2"><div class="de2"><span class="co2">#include &lt;ctime&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;cstring&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;limits&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;list&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;string&gt;</span></div></li><li class="li2"><div class="de2"><span class="kw2">using</span> <span class="kw2">namespace</span> std;</div></li><li> </li><li><div class="de1"><span class="co1">//M lazy ;)</span></div></li><li><div class="de1"><span class="co2">#define ll long long</span></div></li><li><div class="de1"><span class="kw4">typedef</span> vector &lt;int&gt; vi;</div></li><li class="li2"><div class="de2"><span class="kw4">typedef</span> pair&lt; <span class="kw4">int</span> ,<span class="kw4">int</span> &gt; pii;</div></li><li><div class="de1"><span class="kw4">typedef</span> istringstream iss;</div></li><li><div class="de1"><span class="kw4">typedef</span> ostringstream oss;</div></li><li><div class="de1">&nbsp;</div></li><li><div class="de1"><span class="co2">#define pb push_back</span></div></li><li class="li2"><div class="de2"><span class="co2">#define mp make_pair</span></div></li><li><div class="de1"><span class="co2">#define ff first</span></div></li><li><div class="de1"><span class="co2">#define ss second</span></div></li><li><div class="de1"><span class="co2">#define sz size()</span></div></li><li><div class="de1"><span class="co2">#define ln length()</span></div></li><li class="li2"><div class="de2"><span class="co2">#define rep(i,n) for(int i=0;i&lt;n;i++)</span></div></li><li><div class="de1"><span class="co2">#define fu(i,a,n) for(int i=a;i&lt;=n;i++)</span></div></li><li><div class="de1"><span class="co2">#define fd(i,n,a) for(int i=n;i&gt;=a;i--)</span></div></li><li><div class="de1"><span class="co2">#define all(a) a.begin(),a.end()</span></div></li><li><div class="de1"><span class="co2">#define ESP (1e-9)</span></div></li><li class="li2"> </li><li><div class="de1"><span class="co2">#define gi(n) scanf(&quot;%d&quot;,&amp;n)</span></div></li><li><div class="de1"><span class="co2">#define gl(n) cin &gt;&gt; n</span></div></li><li><div class="de1"><span class="co2">#define pi(n) printf(&quot;%d&quot;,n)</span></div></li><li><div class="de1"><span class="co2">#define pl(n) cout &lt;&lt; n</span></div></li><li class="li2"><div class="de2"><span class="co2">#define ps printf(&quot; &quot;)</span></div></li><li><div class="de1"><span class="co2">#define pn printf(&quot;\n&quot;)</span></div></li><li><div class="de1"><span class="co2">#define dg(n,s); printf(&quot;%s %d&quot;,s,n)</span></div></li><li><div class="de1"><span class="co2">#define imax numeric_limits&lt;int&gt;::max()</span></div></li><li><div class="de1"><span class="co2">#define imin numeric_limits&lt;int&gt;::min()</span></div></li><li class="li2"><div class="de2"><span class="co2">#define lmax numeric_limits&lt;ll&gt;::max()</span></div></li><li><div class="de1"><span class="co2">#define lmin numeric_limits&lt;ll&gt;::min()</span></div></li><li> </li><li><div class="de1"><span class="kw4">void</span> assertOO<span class="br0">&#40;</span><span class="kw4">int</span> a, <span class="kw4">int</span> n, <span class="kw4">int</span> b<span class="br0">&#41;</span> <span class="br0">&#123;</span></div></li><li><div class="de1">    <a href="http://www.opengroup.org/onlinepubs/009695399/functions/assert.html"><span class="kw3">assert</span></a><span class="br0">&#40;</span> a &lt;= n &amp;&amp; n &lt;= b <span class="br0">&#41;</span>;</div></li><li class="li2"><div class="de2"><span class="br0">&#125;</span></div></li><li><div class="de1">&nbsp;</div></li><li><div class="de1">std::<span class="me2">string</span> to_string<span class="br0">&#40;</span><span class="kw4">int</span> value<span class="br0">&#41;</span></div></li><li><div class="de1"><span class="br0">&#123;</span></div></li><li><div class="de1">  <span class="co1">//create an output string stream</span></div></li><li class="li2"><div class="de2">  std::<span class="me2">ostringstream</span> os ;</div></li><li><div class="de1">&nbsp;</div></li><li><div class="de1">  <span class="co1">//throw the value into the string stream</span></div></li><li><div class="de1">  os &lt;&lt; value ;</div></li><li><div class="de1">&nbsp;</div></li><li class="li2"><div class="de2">  <span class="co1">//convert the string stream into a string and return</span></div></li><li><div class="de1">  <span class="kw1">return</span> os.<span class="me1">str</span><span class="br0">&#40;</span><span class="br0">&#41;</span> ;</div></li><li><div class="de1"><span class="br0">&#125;</span></div></li><li><div class="de1">&nbsp;</div></li><li><div class="de1"><span class="co1">// This class represents a directed graph using adjacency list representation</span></div></li><li class="li2"><div class="de2">class Graph</div></li><li><div class="de1"><span class="br0">&#123;</span></div></li><li><div class="de1">    <span class="kw2">public</span>:</div></li><li><div class="de1">        <span class="kw4">int</span> V;    <span class="co1">// No. of vertices</span></div></li><li><div class="de1">        <span class="kw4">int</span> *rem;</div></li><li class="li2"><div class="de2">&nbsp;</div></li><li><div class="de1">        Graph<span class="br0">&#40;</span><span class="kw4">int</span> V<span class="br0">&#41;</span>;  <span class="co1">// Constructor</span></div></li><li><div class="de1">        string BFS<span class="br0">&#40;</span><span class="kw4">int</span> s<span class="br0">&#41;</span>;  <span class="co1">// prints BFS traversal from a given source s</span></div></li><li><div class="de1"><span class="br0">&#125;</span>;</div></li><li> </li><li class="li2"><div class="de2">Graph::<span class="me2">Graph</span><span class="br0">&#40;</span><span class="kw4">int</span> V<span class="br0">&#41;</span></div></li><li><div class="de1"><span class="br0">&#123;</span></div></li><li><div class="de1">    this-&gt;V = V;</div></li><li><div class="de1">&nbsp;</div></li><li><div class="de1">    rem = <a href="http://www.opengroup.org/onlinepubs/009695399/functions/new.html"><span class="kw3">new</span></a> <span class="kw4">int</span><span class="br0">&#91;</span>V<span class="br0">&#93;</span>;</div></li><li class="li2"><div class="de2">    <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> i = <span class="nu0">0</span>;i&lt;V;i++<span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">        rem<span class="br0">&#91;</span>i<span class="br0">&#93;</span> = <span class="nu0">0</span>;</div></li><li><div class="de1">    <span class="br0">&#125;</span></div></li><li><div class="de1"><span class="br0">&#125;</span></div></li><li> </li><li class="li2"> </li><li><div class="de1">string Graph::<span class="me2">BFS</span><span class="br0">&#40;</span><span class="kw4">int</span> s<span class="br0">&#41;</span></div></li><li><div class="de1"><span class="br0">&#123;</span></div></li><li><div class="de1">    string parVal<span class="br0">&#91;</span>V<span class="br0">&#93;</span>;</div></li><li><div class="de1">    <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> i=<span class="nu0">0</span>;i&lt;V;i++<span class="br0">&#41;</span>    parVal<span class="br0">&#91;</span>i<span class="br0">&#93;</span>=<span class="st0">""</span>;</div></li><li class="li2"><div class="de2">    <span class="kw4">int</span> par;</div></li><li><div class="de1">    <span class="co1">// Create a queue for BFS</span></div></li><li><div class="de1">    <span class="co1">//list&lt;int&gt; queue;</span></div></li><li><div class="de1">    list&lt;int&gt; mod;</div></li><li> </li><li class="li2"><div class="de2">    <span class="co1">//queue.push_back(s);</span></div></li><li><div class="de1">    mod.<span class="me1">push_back</span><span class="br0">&#40;</span>s%V<span class="br0">&#41;</span>;</div></li><li><div class="de1">    parVal<span class="br0">&#91;</span>s%V<span class="br0">&#93;</span> += to_string<span class="br0">&#40;</span>s<span class="br0">&#41;</span>;</div></li><li><div class="de1">&nbsp;</div></li><li><div class="de1">    <span class="kw1">if</span><span class="br0">&#40;</span>s%V == <span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li class="li2"><div class="de2">        <span class="kw1">return</span>  to_string<span class="br0">&#40;</span>s<span class="br0">&#41;</span>;</div></li><li><div class="de1">    <span class="br0">&#125;</span></div></li><li> </li><li><div class="de1">    <span class="kw1">while</span><span class="br0">&#40;</span>!mod.<span class="me1">empty</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span></div></li><li><div class="de1">    <span class="br0">&#123;</span></div></li><li class="li2"><div class="de2">        <span class="co1">// Dequeue a vertex from queue and print it</span></div></li><li><div class="de1">        <span class="co1">//s = queue.front();</span></div></li><li><div class="de1">        par = mod.<span class="me1">front</span><span class="br0">&#40;</span><span class="br0">&#41;</span>;</div></li><li>        </li><li><div class="de1">        <span class="co1">//queue.pop_front();</span></div></li><li class="li2"><div class="de2">        mod.<span class="me1">pop_front</span><span class="br0">&#40;</span><span class="br0">&#41;</span>;</div></li><li>        </li><li><div class="de1">        <span class="coMULTI">/*for(int k =0 ;k&lt;V;k++){</span></div></li><li><div class="de1"><span class="coMULTI">            //cout&lt;&lt;k&lt;&lt;&quot;:&quot;&lt;&lt;parVal[k]&lt;&lt;&quot; , &quot;;</span></div></li><li><div class="de1"><span class="coMULTI">        }</span></div></li><li class="li2"><div class="de2"><span class="coMULTI">        cout&lt;&lt;par&lt;&lt;&quot; \n&quot;;*/</span></div></li><li> </li><li><div class="de1">        <span class="kw1">if</span><span class="br0">&#40;</span>par == <span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">            <span class="kw1">return</span> parVal<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>;</div></li><li><div class="de1">        <span class="br0">&#125;</span></div></li><li class="li2"><div class="de2">&nbsp;</div></li><li><div class="de1">        <span class="kw1">if</span><span class="br0">&#40;</span>rem<span class="br0">&#91;</span><span class="br0">&#40;</span>par*<span class="nu0">10</span><span class="br0">&#41;</span> % V<span class="br0">&#93;</span> != <span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">            <span class="co1">//queue.push_back(0);</span></div></li><li><div class="de1">            mod.<span class="me1">push_back</span><span class="br0">&#40;</span><span class="br0">&#40;</span>par*<span class="nu0">10</span><span class="br0">&#41;</span> % V<span class="br0">&#41;</span>;</div></li><li><div class="de1">            parVal<span class="br0">&#91;</span><span class="br0">&#40;</span>par*<span class="nu0">10</span><span class="br0">&#41;</span> % V<span class="br0">&#93;</span> = parVal<span class="br0">&#91;</span>par<span class="br0">&#93;</span> + to_string<span class="br0">&#40;</span><span class="nu0">0</span><span class="br0">&#41;</span>;</div></li><li class="li2"><div class="de2">            rem<span class="br0">&#91;</span><span class="br0">&#40;</span>par*<span class="nu0">10</span><span class="br0">&#41;</span> % V<span class="br0">&#93;</span> = <span class="nu0">1</span>;</div></li><li><div class="de1">            <span class="co1">//cout&lt;&lt;(par*10) % V&lt;&lt;&quot;  ,&quot;;</span></div></li><li><div class="de1">        <span class="br0">&#125;</span></div></li><li>        </li><li><div class="de1">        <span class="kw1">if</span><span class="br0">&#40;</span>rem<span class="br0">&#91;</span><span class="br0">&#40;</span>par*<span class="nu0">10</span> + <span class="nu0">1</span><span class="br0">&#41;</span> % V<span class="br0">&#93;</span> != <span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li class="li2"><div class="de2">            <span class="co1">//queue.push_back(1);</span></div></li><li><div class="de1">            mod.<span class="me1">push_back</span><span class="br0">&#40;</span><span class="br0">&#40;</span>par*<span class="nu0">10</span> + <span class="nu0">1</span><span class="br0">&#41;</span> % V<span class="br0">&#41;</span>;</div></li><li><div class="de1">            parVal<span class="br0">&#91;</span><span class="br0">&#40;</span>par*<span class="nu0">10</span> + <span class="nu0">1</span><span class="br0">&#41;</span> % V<span class="br0">&#93;</span> = parVal<span class="br0">&#91;</span>par<span class="br0">&#93;</span> + to_string<span class="br0">&#40;</span><span class="nu0">1</span><span class="br0">&#41;</span>;</div></li><li><div class="de1">            rem<span class="br0">&#91;</span><span class="br0">&#40;</span>par*<span class="nu0">10</span>+<span class="nu0">1</span><span class="br0">&#41;</span> % V<span class="br0">&#93;</span> = <span class="nu0">1</span>;</div></li><li><div class="de1">            <span class="co1">//cout&lt;&lt;(par*10+1) % V;</span></div></li><li class="li2"><div class="de2">        <span class="br0">&#125;</span></div></li><li><div class="de1">        <span class="co1">//cout&lt;&lt;&quot;\n&quot;;</span></div></li><li><div class="de1">    <span class="br0">&#125;</span></div></li><li><div class="de1">    <span class="kw1">return</span> <span class="st0">""</span>;</div></li><li><div class="de1"><span class="br0">&#125;</span></div></li><li class="li2"><div class="de2">&nbsp;</div></li><li><div class="de1"><span class="kw4">int</span> main<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">&nbsp;</div></li><li>    </li><li><div class="de1">    ll <span class="kw4">int</span> T, N;</div></li><li class="li2"><div class="de2">    <a href="http://www.opengroup.org/onlinepubs/009695399/functions/scanf.html"><span class="kw3">scanf</span></a><span class="br0">&#40;</span><span class="st0">"%lld"</span>,&amp;T<span class="br0">&#41;</span>;</div></li><li><div class="de1">&nbsp;</div></li><li><div class="de1">    <span class="kw1">while</span><span class="br0">&#40;</span>T--<span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">        <a href="http://www.opengroup.org/onlinepubs/009695399/functions/scanf.html"><span class="kw3">scanf</span></a><span class="br0">&#40;</span><span class="st0">"%lld"</span>,&amp;N<span class="br0">&#41;</span>;</div></li><li><div class="de1">&nbsp;</div></li><li class="li2"><div class="de2">        Graph g<span class="br0">&#40;</span>N<span class="br0">&#41;</span>;</div></li><li><div class="de1">&nbsp;</div></li><li><div class="de1">        cout&lt;&lt;g.<span class="me1">BFS</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="br0">&#41;</span>&lt;&lt;endl;</div></li><li><div class="de1">&nbsp;</div></li><li><div class="de1">    <span class="br0">&#125;</span></div></li><li class="li2">    </li><li><div class="de1">    <span class="kw1">return</span> <span class="nu0">0</span>;</div></li><li><div class="de1"><span class="br0">&#125;</span> </div></li></ol></pre></body></html>
+std::string to_string(int value)
+{
+  //create an output string stream
+  std::ostringstream os ;
+
+  //throw the value into the string stream
+  os << value ;
+
+  //convert the string stream into a string and return
+  return os.str() ;
+}
+
+// This class represents a directed graph using adjacency list representation
+class Graph
+{
+    public:
+        int V;    // No. of vertices
+        int *rem;
+
+        Graph(int V);  // Constructor
+        string BFS(int s);  // prints BFS traversal from a given source s
+};
+ 
+Graph::Graph(int V)
+{
+    this->V = V;
+
+    rem = new int[V];
+    for(int i = 0;i<V;i++){
+        rem[i] = 0;
+    }
+}
+ 
+ 
+string Graph::BFS(int s)
+{
+    string parVal[V];
+    for(int i=0;i<V;i++)    parVal[i]="";
+    int par;
+    // Create a queue for BFS
+    //list<int> queue;
+    list<int> mod;
+ 
+    //queue.push_back(s);
+    mod.push_back(s%V);
+    parVal[s%V] += to_string(s);
+
+    if(s%V == 0){
+        return  to_string(s);
+    }
+ 
+    while(!mod.empty())
+    {
+        // Dequeue a vertex from queue and print it
+        //s = queue.front();
+        par = mod.front();
+        
+        //queue.pop_front();
+        mod.pop_front();
+        
+        /*for(int k =0 ;k<V;k++){
+            //cout<<k<<":"<<parVal[k]<<" , ";
+        }
+        cout<<par<<" \n";*/
+ 
+        if(par == 0){
+            return parVal[0];
+        }
+
+        if(rem[(par*10) % V] != 1){
+            //queue.push_back(0);
+            mod.push_back((par*10) % V);
+            parVal[(par*10) % V] = parVal[par] + to_string(0);
+            rem[(par*10) % V] = 1;
+            //cout<<(par*10) % V<<"  ,";
+        }
+        
+        if(rem[(par*10 + 1) % V] != 1){
+            //queue.push_back(1);
+            mod.push_back((par*10 + 1) % V);
+            parVal[(par*10 + 1) % V] = parVal[par] + to_string(1);
+            rem[(par*10+1) % V] = 1;
+            //cout<<(par*10+1) % V;
+        }
+        //cout<<"\n";
+    }
+    return "";
+}
+
+int main(){
+
+    
+    ll int T, N;
+    scanf("%lld",&T);
+
+    while(T--){
+        scanf("%lld",&N);
+
+        Graph g(N);
+
+        cout<<g.BFS(1)<<endl;
+
+    }
+    
+    return 0;
+}

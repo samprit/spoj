@@ -15,6 +15,7 @@
 #include <ctime>
 #include <cstring>
 #include <limits>
+
 using namespace std;
  
 //M lazy ;)
@@ -32,47 +33,41 @@ void assertOO(int a, int n, int b) {
     assert( a <= n && n <= b );
 }
 
+short dp[6101][6101] = {0};
+
+short lcs(string a){
+
+    string b = a;
+    reverse(b.begin(), b.end());
+
+    for(short i=1;i<=a.size();i++){
+        for(short j=1;j<=b.size();j++){
+            if(a[i-1] == b[j-1]){
+                dp[i][j] = dp[i-1][j-1]+1;
+            }else{  
+                dp[i][j] = max(dp[i-1][j], dp[i][j-1]) ;
+            }
+        }
+
+    }
+
+    return (a.size() - dp[a.size()][b.size()]);
+
+}
+
 int main(){
 
-	ll int T;
-	cin>>T;
+    ll int T;
 
-	map<string, int> variation;
+    scanf("%lld",&T);
 
-	while(T--){
-		ll int N;
-		cin>>N;
-		 string toss;
-		 cin>>toss;
+    while(T--){
+        char str[6200];
+        scanf("%s",str);
+        printf("%d\n", lcs(string(str)));
+    }
 
-		 variation.clear();
 
-		 variation["TTT"] = 0;
-		 variation["TTH"] = 0;
-		 variation["THT"] = 0;
-		 variation["THH"] = 0;
-		 variation["HTT"] = 0;
-		 variation["HTH"] = 0;
-		 variation["HHT"] = 0;
-		 variation["HHH"] = 0;
-
-		 string subs;
-		 for(int i=0;i<toss.size()-2;i++){
-		 	subs = toss.substr(i,3);
-		 	variation[subs]++;
-		 }
-
-		 cout<<N<<" ";
-		 cout<<variation["TTT"]<<" ";
-		 cout<<variation["TTH"]<<" ";
-		 cout<<variation["THT"]<<" ";
-		 cout<<variation["THH"]<<" ";
-		 cout<<variation["HTT"]<<" ";
-		 cout<<variation["HTH"]<<" ";
-		 cout<<variation["HHT"]<<" ";
-		 cout<<variation["HHH"]<<"\n";
-
-	}
 
 	return 0;
 }

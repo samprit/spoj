@@ -1,22 +1,24 @@
-
-
-<html><head><meta http-equiv='Content-Type' content='text/html; charset=iso-8859-2'><title>SPOJ submission 12614524 (C++ 4.3.2)</title><style type='text/css'><!--/* GeSHi (c) Nigel McNie 2004 (http://qbnz.com/highlighter) */
-.cpp  {color: #000066; border: 1px solid #d0d0d0; background-color: #f0f0f0;}
-.cpp a:link {color: #000060;}
-.cpp a:hover {background-color: #f0f000;}
-.cpp .head {font-family: Verdana, Arial, sans-serif; color: #808080; font-size: 70%; font-weight: bold; background-color: #f0f0ff; border-bottom: 1px solid #d0d0d0; padding: 2px;}
-.cpp .imp {font-weight: bold; color: red;}
-.cpp .kw1 {color: #0000ff;}
-.cpp .kw2 {color: #0000ff;}
-.cpp .kw3 {color: #0000dd;}
-.cpp .kw4 {color: #0000ff;}
-.cpp .co1 {color: #ff0000;}
-.cpp .co2 {color: #339900;}
-.cpp .coMULTI {color: #ff0000; font-style: italic;}
-.cpp .es0 {color: #666666; font-weight: bold;}
-.cpp .br0 {color: #000000;}
-.cpp .st0 {color: #666666;}
-.cpp .nu0 {color: #0000dd;}
-.cpp .me1 {color: #00eeff;}
-.cpp .me2 {color: #00eeff;}
---></style></head><body><pre class="cpp"><div class="head">SPOJ submission 12614524 (C++ 4.3.2) <a href='/files/src/save/12614524'>plaintext</a> <a href='/status/LASTDIG2,samprit/'>list</a>. Status: AC, problem LASTDIG2, contest SPOJ. By samprit (Samprit Biswas), 2014-10-13 12:42:53.</div><ol><li><div class="de1"><span class="co2">#include &lt;iostream&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;string&gt;</span></div></li><li><div class="de1"><span class="kw2">using</span> <span class="kw2">namespace</span> std;	</div></li><li><div class="de1"><span class="kw4">int</span> main<span class="br0">&#40;</span><span class="kw4">int</span> argc, <span class="kw4">const</span> <span class="kw4">char</span> *argv<span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span></div></li><li class="li2"><div class="de2"><span class="kw4">int</span> zad<span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">4</span><span class="br0">&#93;</span> =<span class="br0">&#123;</span><span class="br0">&#123;</span><span class="nu0">0</span>, <span class="nu0">0</span>, <span class="nu0">0</span>, <span class="nu0">0</span><span class="br0">&#125;</span>, <span class="br0">&#123;</span><span class="nu0">1</span>, <span class="nu0">1</span>, <span class="nu0">1</span>, <span class="nu0">1</span><span class="br0">&#125;</span>,<span class="br0">&#123;</span><span class="nu0">2</span>, <span class="nu0">4</span>, <span class="nu0">8</span>, <span class="nu0">6</span><span class="br0">&#125;</span>, <span class="br0">&#123;</span><span class="nu0">3</span>, <span class="nu0">9</span>, <span class="nu0">7</span>, <span class="nu0">1</span><span class="br0">&#125;</span>,<span class="br0">&#123;</span><span class="nu0">4</span>, <span class="nu0">6</span>, <span class="nu0">4</span>, <span class="nu0">6</span><span class="br0">&#125;</span>, <span class="br0">&#123;</span><span class="nu0">5</span>, <span class="nu0">5</span>, <span class="nu0">5</span>, <span class="nu0">5</span><span class="br0">&#125;</span>,</div></li><li><div class="de1"><span class="br0">&#123;</span><span class="nu0">6</span>, <span class="nu0">6</span>, <span class="nu0">6</span>, <span class="nu0">6</span><span class="br0">&#125;</span>, <span class="br0">&#123;</span><span class="nu0">7</span>, <span class="nu0">9</span>, <span class="nu0">3</span>, <span class="nu0">1</span><span class="br0">&#125;</span>,</div></li><li><div class="de1"><span class="br0">&#123;</span><span class="nu0">8</span>, <span class="nu0">4</span>, <span class="nu0">2</span>, <span class="nu0">6</span><span class="br0">&#125;</span>, <span class="br0">&#123;</span><span class="nu0">9</span>, <span class="nu0">1</span>, <span class="nu0">9</span>, <span class="nu0">1</span><span class="br0">&#125;</span><span class="br0">&#125;</span>;</div></li><li><div class="de1"><span class="kw4">int</span> t;</div></li><li><div class="de1"><a href="http://www.opengroup.org/onlinepubs/009695399/functions/cin.html"><span class="kw3">cin</span></a> &gt;&gt; t;</div></li><li class="li2"><div class="de2"><span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> i=<span class="nu0">0</span>; i&lt;t; i++<span class="br0">&#41;</span> <span class="br0">&#123;</span></div></li><li><div class="de1">string a;</div></li><li><div class="de1"><span class="kw4">long</span> long b;</div></li><li><div class="de1"><a href="http://www.opengroup.org/onlinepubs/009695399/functions/cin.html"><span class="kw3">cin</span></a> &gt;&gt; a &gt;&gt; b;</div></li><li><div class="de1"><span class="kw1">if</span><span class="br0">&#40;</span>b==<span class="nu0">0</span><span class="br0">&#41;</span> <span class="br0">&#123;</span></div></li><li class="li2"><div class="de2"><a href="http://www.opengroup.org/onlinepubs/009695399/functions/cout.html"><span class="kw3">cout</span></a> &lt;&lt; <span class="nu0">1</span> &lt;&lt; endl;</div></li><li><div class="de1"><span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span></div></li><li><div class="de1"><span class="kw4">int</span> aa = a<span class="br0">&#91;</span>a.<span class="me1">size</span><span class="br0">&#40;</span><span class="br0">&#41;</span>-<span class="nu0">1</span><span class="br0">&#93;</span> - <span class="st0">'0'</span>;</div></li><li><div class="de1">b %= <span class="nu0">4</span>;</div></li><li><div class="de1">b = <span class="br0">&#40;</span>b == <span class="nu0">0</span><span class="br0">&#41;</span> ? <span class="nu0">3</span> : b-<span class="nu0">1</span>;</div></li><li class="li2"><div class="de2"><a href="http://www.opengroup.org/onlinepubs/009695399/functions/cout.html"><span class="kw3">cout</span></a> &lt;&lt; zad<span class="br0">&#91;</span>aa<span class="br0">&#93;</span><span class="br0">&#91;</span>b<span class="br0">&#93;</span> &lt;&lt; endl;</div></li><li><div class="de1"><span class="br0">&#125;</span></div></li><li><div class="de1"><span class="br0">&#125;</span></div></li><li><div class="de1"><span class="kw1">return</span> <span class="nu0">0</span>;</div></li><li><div class="de1"><span class="br0">&#125;</span> </div></li></ol></pre></body></html>
+#include <iostream>
+#include <string>
+using namespace std;	
+int main(int argc, const char *argv[]) {
+int zad[][4] ={{0, 0, 0, 0}, {1, 1, 1, 1},{2, 4, 8, 6}, {3, 9, 7, 1},{4, 6, 4, 6}, {5, 5, 5, 5},
+{6, 6, 6, 6}, {7, 9, 3, 1},
+{8, 4, 2, 6}, {9, 1, 9, 1}};
+int t;
+cin >> t;
+for(int i=0; i<t; i++) {
+string a;
+long long b;
+cin >> a >> b;
+if(b==0) {
+cout << 1 << endl;
+} else {
+int aa = a[a.size()-1] - '0';
+b %= 4;
+b = (b == 0) ? 3 : b-1;
+cout << zad[aa][b] << endl;
+}
+}
+return 0;
+}

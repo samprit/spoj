@@ -1,22 +1,55 @@
+#include <iostream>
+#include <cstdio>
+#include <string>
+#include <queue>
+#include <stack>
+#include <algorithm>
+#include <cmath>
+#include <map>
+
+#define ll long long
+
+using namespace std;
+
+bool valid1(int num){
+	if(num>0 && num<=9){
+		return true;
+	}else {
+		return false;
+	}
+}
+
+bool valid2(int num1, int num2){
+	int temp = num2*10 + num1;
+	if(temp>9 && temp<=26){
+		return true;
+	}else{
+		return false;
+	}
+}
+
+int main()
+{
+	string input;
+	cin>>input;
+
+	while(input!="0"){
+
+		ll int dp[input.size()];
+		dp[0] = 1;
+		int i;
+
+		for(i=1;i<input.size();i++){
+
+			dp[i] = (valid1(input[i]-'0')?dp[i-1]:0) + (valid2(input[i]-'0', input[i-1]-'0')?dp[(i-2<0)?0:(i-2)]:0);
+
+		}
 
 
-<html><head><meta http-equiv='Content-Type' content='text/html; charset=iso-8859-2'><title>SPOJ submission 12512421 (C++ 4.3.2)</title><style type='text/css'><!--/* GeSHi (c) Nigel McNie 2004 (http://qbnz.com/highlighter) */
-.cpp  {color: #000066; border: 1px solid #d0d0d0; background-color: #f0f0f0;}
-.cpp a:link {color: #000060;}
-.cpp a:hover {background-color: #f0f000;}
-.cpp .head {font-family: Verdana, Arial, sans-serif; color: #808080; font-size: 70%; font-weight: bold; background-color: #f0f0ff; border-bottom: 1px solid #d0d0d0; padding: 2px;}
-.cpp .imp {font-weight: bold; color: red;}
-.cpp .kw1 {color: #0000ff;}
-.cpp .kw2 {color: #0000ff;}
-.cpp .kw3 {color: #0000dd;}
-.cpp .kw4 {color: #0000ff;}
-.cpp .co1 {color: #ff0000;}
-.cpp .co2 {color: #339900;}
-.cpp .coMULTI {color: #ff0000; font-style: italic;}
-.cpp .es0 {color: #666666; font-weight: bold;}
-.cpp .br0 {color: #000000;}
-.cpp .st0 {color: #666666;}
-.cpp .nu0 {color: #0000dd;}
-.cpp .me1 {color: #00eeff;}
-.cpp .me2 {color: #00eeff;}
---></style></head><body><pre class="cpp"><div class="head">SPOJ submission 12512421 (C++ 4.3.2) <a href='/files/src/save/12512421'>plaintext</a> <a href='/status/ACODE,samprit/'>list</a>. Status: AC, problem ACODE, contest SPOJ. By samprit (Samprit Biswas), 2014-10-01 17:03:42.</div><ol><li><div class="de1"><span class="co2">#include &lt;iostream&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;cstdio&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;string&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;queue&gt;</span></div></li><li class="li2"><div class="de2"><span class="co2">#include &lt;stack&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;algorithm&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;cmath&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;map&gt;</span></div></li><li><div class="de1">&nbsp;</div></li><li class="li2"><div class="de2"><span class="co2">#define ll long long</span></div></li><li><div class="de1">&nbsp;</div></li><li><div class="de1"><span class="kw2">using</span> <span class="kw2">namespace</span> std;</div></li><li><div class="de1">&nbsp;</div></li><li><div class="de1"><span class="kw4">bool</span> valid1<span class="br0">&#40;</span><span class="kw4">int</span> num<span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li class="li2"><div class="de2">	<span class="kw1">if</span><span class="br0">&#40;</span>num&gt;<span class="nu0">0</span> &amp;&amp; num&lt;=<span class="nu0">9</span><span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">		<span class="kw1">return</span> <span class="kw2">true</span>;</div></li><li><div class="de1">	<span class="br0">&#125;</span><span class="kw1">else</span> <span class="br0">&#123;</span></div></li><li><div class="de1">		<span class="kw1">return</span> <span class="kw2">false</span>;</div></li><li><div class="de1">	<span class="br0">&#125;</span></div></li><li class="li2"><div class="de2"><span class="br0">&#125;</span></div></li><li><div class="de1">&nbsp;</div></li><li><div class="de1"><span class="kw4">bool</span> valid2<span class="br0">&#40;</span><span class="kw4">int</span> num1, <span class="kw4">int</span> num2<span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">	<span class="kw4">int</span> temp = num2*<span class="nu0">10</span> + num1;</div></li><li><div class="de1">	<span class="kw1">if</span><span class="br0">&#40;</span>temp&gt;<span class="nu0">9</span> &amp;&amp; temp&lt;=<span class="nu0">26</span><span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li class="li2"><div class="de2">		<span class="kw1">return</span> <span class="kw2">true</span>;</div></li><li><div class="de1">	<span class="br0">&#125;</span><span class="kw1">else</span><span class="br0">&#123;</span></div></li><li><div class="de1">		<span class="kw1">return</span> <span class="kw2">false</span>;</div></li><li><div class="de1">	<span class="br0">&#125;</span></div></li><li><div class="de1"><span class="br0">&#125;</span></div></li><li class="li2"><div class="de2">&nbsp;</div></li><li><div class="de1"><span class="kw4">int</span> main<span class="br0">&#40;</span><span class="br0">&#41;</span></div></li><li><div class="de1"><span class="br0">&#123;</span></div></li><li><div class="de1">	string input;</div></li><li><div class="de1">	cin&gt;&gt;input;</div></li><li class="li2"><div class="de2">&nbsp;</div></li><li><div class="de1">	<span class="kw1">while</span><span class="br0">&#40;</span>input!=<span class="st0">"0"</span><span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">&nbsp;</div></li><li><div class="de1">		ll <span class="kw4">int</span> dp<span class="br0">&#91;</span>input.<span class="me1">size</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#93;</span>;</div></li><li><div class="de1">		dp<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> = <span class="nu0">1</span>;</div></li><li class="li2"><div class="de2">		<span class="kw4">int</span> i;</div></li><li><div class="de1">&nbsp;</div></li><li><div class="de1">		<span class="kw1">for</span><span class="br0">&#40;</span>i=<span class="nu0">1</span>;i&lt;input.<span class="me1">size</span><span class="br0">&#40;</span><span class="br0">&#41;</span>;i++<span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">&nbsp;</div></li><li><div class="de1">			dp<span class="br0">&#91;</span>i<span class="br0">&#93;</span> = <span class="br0">&#40;</span>valid1<span class="br0">&#40;</span>input<span class="br0">&#91;</span>i<span class="br0">&#93;</span>-<span class="st0">'0'</span><span class="br0">&#41;</span>?dp<span class="br0">&#91;</span>i-<span class="nu0">1</span><span class="br0">&#93;</span>:<span class="nu0">0</span><span class="br0">&#41;</span> + <span class="br0">&#40;</span>valid2<span class="br0">&#40;</span>input<span class="br0">&#91;</span>i<span class="br0">&#93;</span>-<span class="st0">'0'</span>, input<span class="br0">&#91;</span>i-<span class="nu0">1</span><span class="br0">&#93;</span>-<span class="st0">'0'</span><span class="br0">&#41;</span>?dp<span class="br0">&#91;</span><span class="br0">&#40;</span>i-<span class="nu0">2</span>&lt;<span class="nu0">0</span><span class="br0">&#41;</span>?<span class="nu0">0</span>:<span class="br0">&#40;</span>i-<span class="nu0">2</span><span class="br0">&#41;</span><span class="br0">&#93;</span>:<span class="nu0">0</span><span class="br0">&#41;</span>;</div></li><li class="li2"><div class="de2">&nbsp;</div></li><li><div class="de1">		<span class="br0">&#125;</span></div></li><li><div class="de1">&nbsp;</div></li><li><div class="de1">&nbsp;</div></li><li><div class="de1">		cout&lt;&lt;dp<span class="br0">&#91;</span>input.<span class="me1">size</span><span class="br0">&#40;</span><span class="br0">&#41;</span>-<span class="nu0">1</span><span class="br0">&#93;</span>&lt;&lt;endl;</div></li><li class="li2"><div class="de2">		cin&gt;&gt;input;</div></li><li><div class="de1">	<span class="br0">&#125;</span></div></li><li><div class="de1">&nbsp;</div></li><li><div class="de1">&nbsp;</div></li><li><div class="de1">    <span class="kw1">return</span> <span class="nu0">0</span>;</div></li><li class="li2"><div class="de2"><span class="br0">&#125;</span> </div></li></ol></pre></body></html>
+		cout<<dp[input.size()-1]<<endl;
+		cin>>input;
+	}
+
+
+    return 0;
+}

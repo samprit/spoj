@@ -1,22 +1,198 @@
+//Includes
+#include <vector>
+#include <queue>
+#include <map>
+#include <set>
+#include <utility> //Pair
+#include <algorithm>
+#include <sstream> // istringstream>> ostring stream<<
+#include <iostream>
+#include <iomanip>
+#include <cstdio>
+#include <cmath>
+#include <cstdlib>
+#include <cassert>
+#include <ctime>
+#include <cstring>
+#include <limits>
+using namespace std;
+ 
+//M lazy ;)
+#define ll long long
+typedef vector <int> vi;
+typedef pair< int ,int > pii;
+typedef istringstream iss;
+typedef ostringstream oss;
 
+#define pb push_back
+#define mp make_pair
+#define ff first
+#define ss second
+#define sz size()
+#define ln length()
+#define rep(i,n) for(int i=0;i<n;i++)
+#define fu(i,a,n) for(int i=a;i<=n;i++)
+#define fd(i,n,a) for(int i=n;i>=a;i--)
+#define all(a) a.begin(),a.end()
+#define ESP (1e-9)
+ 
+#define gi(n) scanf("%d",&n)
+#define gl(n) cin >> n
+#define pi(n) printf("%d",n)
+#define pl(n) cout << n
+#define ps printf(" ")
+#define pn printf("\n")
+#define dg(n,s); printf("%s %d",s,n)
+#define imax numeric_limits<int>::max()
+#define imin numeric_limits<int>::min()
+#define lmax numeric_limits<ll>::max()
+#define lmin numeric_limits<ll>::min()
+ 
+void assertOO(int a, int n, int b) {
+    assert( a <= n && n <= b );
+}
 
-<html><head><meta http-equiv='Content-Type' content='text/html; charset=iso-8859-2'><title>SPOJ submission 12604962 (C++ 4.3.2)</title><style type='text/css'><!--/* GeSHi (c) Nigel McNie 2004 (http://qbnz.com/highlighter) */
-.cpp  {color: #000066; border: 1px solid #d0d0d0; background-color: #f0f0f0;}
-.cpp a:link {color: #000060;}
-.cpp a:hover {background-color: #f0f000;}
-.cpp .head {font-family: Verdana, Arial, sans-serif; color: #808080; font-size: 70%; font-weight: bold; background-color: #f0f0ff; border-bottom: 1px solid #d0d0d0; padding: 2px;}
-.cpp .imp {font-weight: bold; color: red;}
-.cpp .kw1 {color: #0000ff;}
-.cpp .kw2 {color: #0000ff;}
-.cpp .kw3 {color: #0000dd;}
-.cpp .kw4 {color: #0000ff;}
-.cpp .co1 {color: #ff0000;}
-.cpp .co2 {color: #339900;}
-.cpp .coMULTI {color: #ff0000; font-style: italic;}
-.cpp .es0 {color: #666666; font-weight: bold;}
-.cpp .br0 {color: #000000;}
-.cpp .st0 {color: #666666;}
-.cpp .nu0 {color: #0000dd;}
-.cpp .me1 {color: #00eeff;}
-.cpp .me2 {color: #00eeff;}
---></style></head><body><pre class="cpp"><div class="head">SPOJ submission 12604962 (C++ 4.3.2) <a href='/files/src/save/12604962'>plaintext</a> <a href='/status/DISUBSTR,samprit/'>list</a>. Status: AC, problem DISUBSTR, contest SPOJ. By samprit (Samprit Biswas), 2014-10-12 08:13:43.</div><ol><li><div class="de1"><span class="co1">//Includes</span></div></li><li><div class="de1"><span class="co2">#include &lt;vector&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;queue&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;map&gt;</span></div></li><li class="li2"><div class="de2"><span class="co2">#include &lt;set&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;utility&gt; //Pair</span></div></li><li><div class="de1"><span class="co2">#include &lt;algorithm&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;sstream&gt; // istringstream&gt;&gt; ostring stream&lt;&lt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;iostream&gt;</span></div></li><li class="li2"><div class="de2"><span class="co2">#include &lt;iomanip&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;cstdio&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;cmath&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;cstdlib&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;cassert&gt;</span></div></li><li class="li2"><div class="de2"><span class="co2">#include &lt;ctime&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;cstring&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;limits&gt;</span></div></li><li><div class="de1"><span class="kw2">using</span> <span class="kw2">namespace</span> std;</div></li><li> </li><li class="li2"><div class="de2"><span class="co1">//M lazy ;)</span></div></li><li><div class="de1"><span class="co2">#define ll long long</span></div></li><li><div class="de1"><span class="kw4">typedef</span> vector &lt;int&gt; vi;</div></li><li><div class="de1"><span class="kw4">typedef</span> pair&lt; <span class="kw4">int</span> ,<span class="kw4">int</span> &gt; pii;</div></li><li><div class="de1"><span class="kw4">typedef</span> istringstream iss;</div></li><li class="li2"><div class="de2"><span class="kw4">typedef</span> ostringstream oss;</div></li><li><div class="de1">&nbsp;</div></li><li><div class="de1"><span class="co2">#define pb push_back</span></div></li><li><div class="de1"><span class="co2">#define mp make_pair</span></div></li><li><div class="de1"><span class="co2">#define ff first</span></div></li><li class="li2"><div class="de2"><span class="co2">#define ss second</span></div></li><li><div class="de1"><span class="co2">#define sz size()</span></div></li><li><div class="de1"><span class="co2">#define ln length()</span></div></li><li><div class="de1"><span class="co2">#define rep(i,n) for(int i=0;i&lt;n;i++)</span></div></li><li><div class="de1"><span class="co2">#define fu(i,a,n) for(int i=a;i&lt;=n;i++)</span></div></li><li class="li2"><div class="de2"><span class="co2">#define fd(i,n,a) for(int i=n;i&gt;=a;i--)</span></div></li><li><div class="de1"><span class="co2">#define all(a) a.begin(),a.end()</span></div></li><li><div class="de1"><span class="co2">#define ESP (1e-9)</span></div></li><li> </li><li><div class="de1"><span class="co2">#define gi(n) scanf(&quot;%d&quot;,&amp;n)</span></div></li><li class="li2"><div class="de2"><span class="co2">#define gl(n) cin &gt;&gt; n</span></div></li><li><div class="de1"><span class="co2">#define pi(n) printf(&quot;%d&quot;,n)</span></div></li><li><div class="de1"><span class="co2">#define pl(n) cout &lt;&lt; n</span></div></li><li><div class="de1"><span class="co2">#define ps printf(&quot; &quot;)</span></div></li><li><div class="de1"><span class="co2">#define pn printf(&quot;\n&quot;)</span></div></li><li class="li2"><div class="de2"><span class="co2">#define dg(n,s); printf(&quot;%s %d&quot;,s,n)</span></div></li><li><div class="de1"><span class="co2">#define imax numeric_limits&lt;int&gt;::max()</span></div></li><li><div class="de1"><span class="co2">#define imin numeric_limits&lt;int&gt;::min()</span></div></li><li><div class="de1"><span class="co2">#define lmax numeric_limits&lt;ll&gt;::max()</span></div></li><li><div class="de1"><span class="co2">#define lmin numeric_limits&lt;ll&gt;::min()</span></div></li><li class="li2"> </li><li><div class="de1"><span class="kw4">void</span> assertOO<span class="br0">&#40;</span><span class="kw4">int</span> a, <span class="kw4">int</span> n, <span class="kw4">int</span> b<span class="br0">&#41;</span> <span class="br0">&#123;</span></div></li><li><div class="de1">    <a href="http://www.opengroup.org/onlinepubs/009695399/functions/assert.html"><span class="kw3">assert</span></a><span class="br0">&#40;</span> a &lt;= n &amp;&amp; n &lt;= b <span class="br0">&#41;</span>;</div></li><li><div class="de1"><span class="br0">&#125;</span></div></li><li><div class="de1">&nbsp;</div></li><li class="li2"><div class="de2"><span class="kw4">const</span> <span class="kw4">int</span> N = <span class="nu0">50005</span>;</div></li><li><div class="de1"><span class="co1">// Begins Suffix Arrays implementation</span></div></li><li><div class="de1"><span class="co1">// O(n log n) - Manber and Myers algorithm</span></div></li><li> </li><li><div class="de1"><span class="co1">//Usage:</span></div></li><li class="li2"><div class="de2"><span class="co1">// Fill str with the characters of the string.</span></div></li><li><div class="de1"><span class="co1">// Call SuffixSort(n), where n is the length of the string stored in str.</span></div></li><li><div class="de1"><span class="co1">// That's it!</span></div></li><li> </li><li><div class="de1"><span class="co1">//Output:</span></div></li><li class="li2"><div class="de2"><span class="co1">// pos = The suffix array. Contains the n suffixes of str sorted in lexicographical order.</span></div></li><li><div class="de1"><span class="co1">//       Each suffix is represented as a single integer (the position of str where it starts).</span></div></li><li><div class="de1"><span class="co1">// rank = The inverse of the suffix array. rank[i] = the index of the suffix str[i..n)</span></div></li><li><div class="de1"><span class="co1">//        in the pos array. (In other words, pos[i] = k &lt;==&gt; rank[k] = i)</span></div></li><li><div class="de1"><span class="co1">//        With this array, you can compare two suffixes in O(1): Suffix str[i..n) is smaller</span></div></li><li class="li2"><div class="de2"><span class="co1">//        than str[j..n) if and only if rank[i] &lt; rank[j]</span></div></li><li> </li><li><div class="de1"><span class="kw4">int</span> str<span class="br0">&#91;</span>N<span class="br0">&#93;</span>; 		<span class="co1">//input</span></div></li><li><div class="de1"><span class="kw4">int</span> rank<span class="br0">&#91;</span>N<span class="br0">&#93;</span>, pos<span class="br0">&#91;</span>N<span class="br0">&#93;</span>; <span class="co1">//output</span></div></li><li><div class="de1"><span class="kw4">int</span> cnt<span class="br0">&#91;</span>N<span class="br0">&#93;</span>, next<span class="br0">&#91;</span>N<span class="br0">&#93;</span>; <span class="co1">//internal</span></div></li><li class="li2"><div class="de2"><span class="kw4">bool</span> bh<span class="br0">&#91;</span>N<span class="br0">&#93;</span>, b2h<span class="br0">&#91;</span>N<span class="br0">&#93;</span>;</div></li><li> </li><li><div class="de1"><span class="kw4">bool</span> smaller_first_char<span class="br0">&#40;</span><span class="kw4">int</span> a, <span class="kw4">int</span> b<span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">  <span class="kw1">return</span> str<span class="br0">&#91;</span>a<span class="br0">&#93;</span> &lt; str<span class="br0">&#91;</span>b<span class="br0">&#93;</span>;</div></li><li><div class="de1"><span class="br0">&#125;</span></div></li><li class="li2"> </li><li><div class="de1"><span class="kw4">void</span> SuffixSort<span class="br0">&#40;</span><span class="kw4">int</span> n<span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">  <span class="co1">//sort suffixes according to their first character</span></div></li><li><div class="de1">  <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i=<span class="nu0">0</span>; i&lt;n; ++i<span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">    pos<span class="br0">&#91;</span>i<span class="br0">&#93;</span> = i;</div></li><li class="li2"><div class="de2">  <span class="br0">&#125;</span></div></li><li><div class="de1">  sort<span class="br0">&#40;</span>pos, pos + n, smaller_first_char<span class="br0">&#41;</span>;</div></li><li><div class="de1">  <span class="co1">//{pos contains the list of suffixes sorted by their first character}</span></div></li><li> </li><li><div class="de1">  <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i=<span class="nu0">0</span>; i&lt;n; ++i<span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li class="li2"><div class="de2">    bh<span class="br0">&#91;</span>i<span class="br0">&#93;</span> = i == <span class="nu0">0</span> || str<span class="br0">&#91;</span>pos<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#93;</span> != str<span class="br0">&#91;</span>pos<span class="br0">&#91;</span>i-<span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#93;</span>;</div></li><li><div class="de1">    b2h<span class="br0">&#91;</span>i<span class="br0">&#93;</span> = <span class="kw2">false</span>;</div></li><li><div class="de1">  <span class="br0">&#125;</span></div></li><li> </li><li><div class="de1">  <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> h = <span class="nu0">1</span>; h &lt; n; h &lt;&lt;= <span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li class="li2"><div class="de2">    <span class="co1">//{bh[i] == false if the first h characters of pos[i-1] == the first h characters of pos[i]}</span></div></li><li><div class="de1">    <span class="kw4">int</span> buckets = <span class="nu0">0</span>;</div></li><li><div class="de1">    <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i=<span class="nu0">0</span>, j; i &lt; n; i = j<span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">      j = i + <span class="nu0">1</span>;</div></li><li><div class="de1">      <span class="kw1">while</span> <span class="br0">&#40;</span>j &lt; n &amp;&amp; !bh<span class="br0">&#91;</span>j<span class="br0">&#93;</span><span class="br0">&#41;</span> j++;</div></li><li class="li2"><div class="de2">      next<span class="br0">&#91;</span>i<span class="br0">&#93;</span> = j;</div></li><li><div class="de1">      buckets++;</div></li><li><div class="de1">    <span class="br0">&#125;</span></div></li><li><div class="de1">    <span class="kw1">if</span> <span class="br0">&#40;</span>buckets == n<span class="br0">&#41;</span> <span class="kw2">break</span>; <span class="co1">// We are done! Lucky bastards!</span></div></li><li><div class="de1">    <span class="co1">//{suffixes are separted in buckets containing strings starting with the same h characters}</span></div></li><li class="li2"> </li><li><div class="de1">    <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i = <span class="nu0">0</span>; i &lt; n; i = next<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">      cnt<span class="br0">&#91;</span>i<span class="br0">&#93;</span> = <span class="nu0">0</span>;</div></li><li><div class="de1">      <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> j = i; j &lt; next<span class="br0">&#91;</span>i<span class="br0">&#93;</span>; ++j<span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">        rank<span class="br0">&#91;</span>pos<span class="br0">&#91;</span>j<span class="br0">&#93;</span><span class="br0">&#93;</span> = i;</div></li><li class="li2"><div class="de2">      <span class="br0">&#125;</span></div></li><li><div class="de1">    <span class="br0">&#125;</span></div></li><li> </li><li><div class="de1">    cnt<span class="br0">&#91;</span>rank<span class="br0">&#91;</span>n - h<span class="br0">&#93;</span><span class="br0">&#93;</span>++;</div></li><li><div class="de1">    b2h<span class="br0">&#91;</span>rank<span class="br0">&#91;</span>n - h<span class="br0">&#93;</span><span class="br0">&#93;</span> = <span class="kw2">true</span>;</div></li><li class="li2"><div class="de2">    <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i = <span class="nu0">0</span>; i &lt; n; i = next<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">      <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> j = i; j &lt; next<span class="br0">&#91;</span>i<span class="br0">&#93;</span>; ++j<span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">        <span class="kw4">int</span> s = pos<span class="br0">&#91;</span>j<span class="br0">&#93;</span> - h;</div></li><li><div class="de1">        <span class="kw1">if</span> <span class="br0">&#40;</span>s &gt;= <span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">          <span class="kw4">int</span> head = rank<span class="br0">&#91;</span>s<span class="br0">&#93;</span>;</div></li><li class="li2"><div class="de2">          rank<span class="br0">&#91;</span>s<span class="br0">&#93;</span> = head + cnt<span class="br0">&#91;</span>head<span class="br0">&#93;</span>++;</div></li><li><div class="de1">          b2h<span class="br0">&#91;</span>rank<span class="br0">&#91;</span>s<span class="br0">&#93;</span><span class="br0">&#93;</span> = <span class="kw2">true</span>;</div></li><li><div class="de1">        <span class="br0">&#125;</span></div></li><li><div class="de1">      <span class="br0">&#125;</span></div></li><li><div class="de1">      <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> j = i; j &lt; next<span class="br0">&#91;</span>i<span class="br0">&#93;</span>; ++j<span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li class="li2"><div class="de2">        <span class="kw4">int</span> s = pos<span class="br0">&#91;</span>j<span class="br0">&#93;</span> - h;</div></li><li><div class="de1">        <span class="kw1">if</span> <span class="br0">&#40;</span>s &gt;= <span class="nu0">0</span> &amp;&amp; b2h<span class="br0">&#91;</span>rank<span class="br0">&#91;</span>s<span class="br0">&#93;</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">          <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> k = rank<span class="br0">&#91;</span>s<span class="br0">&#93;</span>+<span class="nu0">1</span>; !bh<span class="br0">&#91;</span>k<span class="br0">&#93;</span> &amp;&amp; b2h<span class="br0">&#91;</span>k<span class="br0">&#93;</span>; k++<span class="br0">&#41;</span> b2h<span class="br0">&#91;</span>k<span class="br0">&#93;</span> = <span class="kw2">false</span>;</div></li><li><div class="de1">        <span class="br0">&#125;</span></div></li><li><div class="de1">      <span class="br0">&#125;</span></div></li><li class="li2"><div class="de2">    <span class="br0">&#125;</span></div></li><li><div class="de1">    <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i=<span class="nu0">0</span>; i&lt;n; ++i<span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">      pos<span class="br0">&#91;</span>rank<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#93;</span> = i;</div></li><li><div class="de1">      bh<span class="br0">&#91;</span>i<span class="br0">&#93;</span> |= b2h<span class="br0">&#91;</span>i<span class="br0">&#93;</span>;</div></li><li><div class="de1">    <span class="br0">&#125;</span></div></li><li class="li2"><div class="de2">  <span class="br0">&#125;</span></div></li><li><div class="de1">  <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i=<span class="nu0">0</span>; i&lt;n; ++i<span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">    rank<span class="br0">&#91;</span>pos<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#93;</span> = i;</div></li><li><div class="de1">  <span class="br0">&#125;</span></div></li><li><div class="de1"><span class="br0">&#125;</span></div></li><li class="li2"><div class="de2"><span class="co1">// End of suffix array algorithm</span></div></li><li> </li><li><div class="de1"><span class="co1">// Algorithm GetHeight</span></div></li><li><div class="de1"><span class="co1">// input: A text A and its suffix array Pos</span></div></li><li><div class="de1"><span class="co1">//    1 for i:=1 to n do</span></div></li><li class="li2"><div class="de2"><span class="co1">//    2     Rank[Pos[i]] := i</span></div></li><li><div class="de1"><span class="co1">//    3 od</span></div></li><li><div class="de1"><span class="co1">//    4 h:=0</span></div></li><li><div class="de1"><span class="co1">//    5 for i:=1 to n do</span></div></li><li><div class="de1"><span class="co1">//    6     if Rank[i] &gt; 1 then</span></div></li><li class="li2"><div class="de2"><span class="co1">//    7        k := Pos[Rank[i]-1]</span></div></li><li><div class="de1"><span class="co1">//    8        while A[i+h] = A[j+h] do</span></div></li><li><div class="de1"><span class="co1">//    9           h := h+1</span></div></li><li><div class="de1"><span class="co1">//    10       od</span></div></li><li><div class="de1"><span class="co1">//    11       Height[Rank[i]] := h</span></div></li><li class="li2"><div class="de2"><span class="co1">//    12       if h &gt; 0 then h := h-1 fi</span></div></li><li><div class="de1"><span class="co1">//    13    fi</span></div></li><li><div class="de1"><span class="co1">//    14 od</span></div></li><li><div class="de1"><span class="kw4">int</span> height<span class="br0">&#91;</span>N<span class="br0">&#93;</span>;</div></li><li><div class="de1"><span class="co1">// height[i] = length of the longest common prefix of suffix pos[i] and suffix pos[i-1]</span></div></li><li class="li2"><div class="de2"><span class="co1">// height[0] = 0</span></div></li><li><div class="de1">&nbsp;</div></li><li><div class="de1"><span class="kw4">void</span> getHeight<span class="br0">&#40;</span><span class="kw4">int</span> n<span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">  <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i=<span class="nu0">0</span>; i&lt;n; ++i<span class="br0">&#41;</span> rank<span class="br0">&#91;</span>pos<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#93;</span> = i;</div></li><li><div class="de1">  height<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> = <span class="nu0">0</span>;</div></li><li class="li2"><div class="de2">  <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i=<span class="nu0">0</span>, h=<span class="nu0">0</span>; i&lt;n; ++i<span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">    <span class="kw1">if</span> <span class="br0">&#40;</span>rank<span class="br0">&#91;</span>i<span class="br0">&#93;</span> &gt; <span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">      <span class="kw4">int</span> j = pos<span class="br0">&#91;</span>rank<span class="br0">&#91;</span>i<span class="br0">&#93;</span>-<span class="nu0">1</span><span class="br0">&#93;</span>;</div></li><li><div class="de1">      <span class="kw1">while</span> <span class="br0">&#40;</span>i + h &lt; n &amp;&amp; j + h &lt; n &amp;&amp; str<span class="br0">&#91;</span>i+h<span class="br0">&#93;</span> == str<span class="br0">&#91;</span>j+h<span class="br0">&#93;</span><span class="br0">&#41;</span> h++;</div></li><li><div class="de1">      height<span class="br0">&#91;</span>rank<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#93;</span> = h;</div></li><li class="li2"><div class="de2">      <span class="kw1">if</span> <span class="br0">&#40;</span>h &gt; <span class="nu0">0</span><span class="br0">&#41;</span> h--;</div></li><li><div class="de1">    <span class="br0">&#125;</span></div></li><li><div class="de1">  <span class="br0">&#125;</span></div></li><li><div class="de1"><span class="br0">&#125;</span></div></li><li><div class="de1">&nbsp;</div></li><li class="li2"><div class="de2">string s;</div></li><li><div class="de1">&nbsp;</div></li><li><div class="de1"><span class="kw4">void</span> solve<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">  <span class="kw4">int</span> n = s.<span class="me1">size</span><span class="br0">&#40;</span><span class="br0">&#41;</span>;</div></li><li><div class="de1">  <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i=<span class="nu0">0</span>; i&lt;n; ++i<span class="br0">&#41;</span> str<span class="br0">&#91;</span>i<span class="br0">&#93;</span> = s<span class="br0">&#91;</span>i<span class="br0">&#93;</span>;</div></li><li class="li2"><div class="de2">  SuffixSort<span class="br0">&#40;</span>n<span class="br0">&#41;</span>;</div></li><li><div class="de1">  getHeight<span class="br0">&#40;</span>n<span class="br0">&#41;</span>;</div></li><li><div class="de1">  <span class="kw4">long</span> long ans = <span class="nu0">0</span>;</div></li><li><div class="de1">  <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i=<span class="nu0">0</span>; i&lt;n; ++i<span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">    ans += n - pos<span class="br0">&#91;</span>i<span class="br0">&#93;</span> - height<span class="br0">&#91;</span>i<span class="br0">&#93;</span>;</div></li><li class="li2"><div class="de2">  <span class="br0">&#125;</span></div></li><li><div class="de1">  <a href="http://www.opengroup.org/onlinepubs/009695399/functions/cout.html"><span class="kw3">cout</span></a> &lt;&lt; ans &lt;&lt; endl;</div></li><li><div class="de1"><span class="br0">&#125;</span></div></li><li> </li><li> </li><li class="li2"><div class="de2"><span class="kw4">int</span> main<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">  ll t;</div></li><li><div class="de1">  <a href="http://www.opengroup.org/onlinepubs/009695399/functions/cin.html"><span class="kw3">cin</span></a> &gt;&gt; t;</div></li><li><div class="de1">  <span class="kw1">while</span> <span class="br0">&#40;</span>t--<span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">    <a href="http://www.opengroup.org/onlinepubs/009695399/functions/cin.html"><span class="kw3">cin</span></a> &gt;&gt; s;</div></li><li class="li2"><div class="de2">    solve<span class="br0">&#40;</span><span class="br0">&#41;</span>;</div></li><li><div class="de1">  <span class="br0">&#125;</span></div></li><li><div class="de1">  <span class="kw1">return</span> <span class="nu0">0</span>;</div></li><li><div class="de1"><span class="br0">&#125;</span> </div></li></ol></pre></body></html>
+const int N = 50005;
+// Begins Suffix Arrays implementation
+// O(n log n) - Manber and Myers algorithm
+ 
+//Usage:
+// Fill str with the characters of the string.
+// Call SuffixSort(n), where n is the length of the string stored in str.
+// That's it!
+ 
+//Output:
+// pos = The suffix array. Contains the n suffixes of str sorted in lexicographical order.
+//       Each suffix is represented as a single integer (the position of str where it starts).
+// rank = The inverse of the suffix array. rank[i] = the index of the suffix str[i..n)
+//        in the pos array. (In other words, pos[i] = k <==> rank[k] = i)
+//        With this array, you can compare two suffixes in O(1): Suffix str[i..n) is smaller
+//        than str[j..n) if and only if rank[i] < rank[j]
+ 
+int str[N]; 		//input
+int rank[N], pos[N]; //output
+int cnt[N], next[N]; //internal
+bool bh[N], b2h[N];
+ 
+bool smaller_first_char(int a, int b){
+  return str[a] < str[b];
+}
+ 
+void SuffixSort(int n){
+  //sort suffixes according to their first character
+  for (int i=0; i<n; ++i){
+    pos[i] = i;
+  }
+  sort(pos, pos + n, smaller_first_char);
+  //{pos contains the list of suffixes sorted by their first character}
+ 
+  for (int i=0; i<n; ++i){
+    bh[i] = i == 0 || str[pos[i]] != str[pos[i-1]];
+    b2h[i] = false;
+  }
+ 
+  for (int h = 1; h < n; h <<= 1){
+    //{bh[i] == false if the first h characters of pos[i-1] == the first h characters of pos[i]}
+    int buckets = 0;
+    for (int i=0, j; i < n; i = j){
+      j = i + 1;
+      while (j < n && !bh[j]) j++;
+      next[i] = j;
+      buckets++;
+    }
+    if (buckets == n) break; // We are done! Lucky bastards!
+    //{suffixes are separted in buckets containing strings starting with the same h characters}
+ 
+    for (int i = 0; i < n; i = next[i]){
+      cnt[i] = 0;
+      for (int j = i; j < next[i]; ++j){
+        rank[pos[j]] = i;
+      }
+    }
+ 
+    cnt[rank[n - h]]++;
+    b2h[rank[n - h]] = true;
+    for (int i = 0; i < n; i = next[i]){
+      for (int j = i; j < next[i]; ++j){
+        int s = pos[j] - h;
+        if (s >= 0){
+          int head = rank[s];
+          rank[s] = head + cnt[head]++;
+          b2h[rank[s]] = true;
+        }
+      }
+      for (int j = i; j < next[i]; ++j){
+        int s = pos[j] - h;
+        if (s >= 0 && b2h[rank[s]]){
+          for (int k = rank[s]+1; !bh[k] && b2h[k]; k++) b2h[k] = false;
+        }
+      }
+    }
+    for (int i=0; i<n; ++i){
+      pos[rank[i]] = i;
+      bh[i] |= b2h[i];
+    }
+  }
+  for (int i=0; i<n; ++i){
+    rank[pos[i]] = i;
+  }
+}
+// End of suffix array algorithm
+ 
+// Algorithm GetHeight
+// input: A text A and its suffix array Pos
+//    1 for i:=1 to n do
+//    2     Rank[Pos[i]] := i
+//    3 od
+//    4 h:=0
+//    5 for i:=1 to n do
+//    6     if Rank[i] > 1 then
+//    7        k := Pos[Rank[i]-1]
+//    8        while A[i+h] = A[j+h] do
+//    9           h := h+1
+//    10       od
+//    11       Height[Rank[i]] := h
+//    12       if h > 0 then h := h-1 fi
+//    13    fi
+//    14 od
+int height[N];
+// height[i] = length of the longest common prefix of suffix pos[i] and suffix pos[i-1]
+// height[0] = 0
+
+void getHeight(int n){
+  for (int i=0; i<n; ++i) rank[pos[i]] = i;
+  height[0] = 0;
+  for (int i=0, h=0; i<n; ++i){
+    if (rank[i] > 0){
+      int j = pos[rank[i]-1];
+      while (i + h < n && j + h < n && str[i+h] == str[j+h]) h++;
+      height[rank[i]] = h;
+      if (h > 0) h--;
+    }
+  }
+}
+
+string s;
+
+void solve(){
+  int n = s.size();
+  for (int i=0; i<n; ++i) str[i] = s[i];
+  SuffixSort(n);
+  getHeight(n);
+  long long ans = 0;
+  for (int i=0; i<n; ++i){
+    ans += n - pos[i] - height[i];
+  }
+  cout << ans << endl;
+}
+ 
+ 
+int main(){
+  ll t;
+  cin >> t;
+  while (t--){
+    cin >> s;
+    solve();
+  }
+  return 0;
+}

@@ -1,22 +1,61 @@
-
-
-<html><head><meta http-equiv='Content-Type' content='text/html; charset=iso-8859-2'><title>SPOJ submission 12588742 (C++ 4.3.2)</title><style type='text/css'><!--/* GeSHi (c) Nigel McNie 2004 (http://qbnz.com/highlighter) */
-.cpp  {color: #000066; border: 1px solid #d0d0d0; background-color: #f0f0f0;}
-.cpp a:link {color: #000060;}
-.cpp a:hover {background-color: #f0f000;}
-.cpp .head {font-family: Verdana, Arial, sans-serif; color: #808080; font-size: 70%; font-weight: bold; background-color: #f0f0ff; border-bottom: 1px solid #d0d0d0; padding: 2px;}
-.cpp .imp {font-weight: bold; color: red;}
-.cpp .kw1 {color: #0000ff;}
-.cpp .kw2 {color: #0000ff;}
-.cpp .kw3 {color: #0000dd;}
-.cpp .kw4 {color: #0000ff;}
-.cpp .co1 {color: #ff0000;}
-.cpp .co2 {color: #339900;}
-.cpp .coMULTI {color: #ff0000; font-style: italic;}
-.cpp .es0 {color: #666666; font-weight: bold;}
-.cpp .br0 {color: #000000;}
-.cpp .st0 {color: #666666;}
-.cpp .nu0 {color: #0000dd;}
-.cpp .me1 {color: #00eeff;}
-.cpp .me2 {color: #00eeff;}
---></style></head><body><pre class="cpp"><div class="head">SPOJ submission 12588742 (C++ 4.3.2) <a href='/files/src/save/12588742'>plaintext</a> <a href='/status/STRDIST,samprit/'>list</a>. Status: AC, problem STRDIST, contest SPOJ. By samprit (Samprit Biswas), 2014-10-10 12:38:28.</div><ol><li><div class="de1"><span class="co2">#include &lt;algorithm&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;cctype&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;climits&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;cmath&gt;</span></div></li><li class="li2"><div class="de2"><span class="co2">#include &lt;cstdio&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;cstdlib&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;cstring&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;iostream&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;list&gt;</span></div></li><li class="li2"><div class="de2"><span class="co2">#include &lt;map&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;queue&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;set&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;sstream&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;string&gt;</span></div></li><li class="li2"><div class="de2"><span class="co2">#include &lt;vector&gt;</span></div></li><li><div class="de1"><span class="co2">#define inf 1000000000</span></div></li><li><div class="de1"><span class="co2">#define MAX 100001</span></div></li><li><div class="de1"><span class="kw2">using</span> <span class="kw2">namespace</span> std;</div></li><li><div class="de1">string a, b;</div></li><li class="li2"><div class="de2"><span class="kw4">int</span> dp<span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span><span class="br0">&#91;</span>MAX<span class="br0">&#93;</span>;</div></li><li><div class="de1"><span class="kw4">int</span> main<span class="br0">&#40;</span><span class="br0">&#41;</span></div></li><li><div class="de1"><span class="br0">&#123;</span></div></li><li><div class="de1">    <a href="http://www.opengroup.org/onlinepubs/009695399/functions/cin.html"><span class="kw3">cin</span></a>.<span class="me1">sync_with_stdio</span><span class="br0">&#40;</span><span class="kw2">false</span><span class="br0">&#41;</span>;</div></li><li><div class="de1">    <span class="kw4">int</span> l, k;</div></li><li class="li2"><div class="de2">    <a href="http://www.opengroup.org/onlinepubs/009695399/functions/cin.html"><span class="kw3">cin</span></a> &gt;&gt; l &gt;&gt; k;</div></li><li><div class="de1">    <a href="http://www.opengroup.org/onlinepubs/009695399/functions/cin.html"><span class="kw3">cin</span></a> &gt;&gt; a &gt;&gt; b;</div></li><li><div class="de1">    <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> j = <span class="nu0">1</span>; j &lt;= k; ++j<span class="br0">&#41;</span></div></li><li><div class="de1">    <span class="br0">&#123;</span></div></li><li><div class="de1">        dp<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> = j;</div></li><li class="li2"><div class="de2">    <span class="br0">&#125;</span></div></li><li><div class="de1">    <span class="kw4">int</span> tmp_min;</div></li><li><div class="de1">    <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i = <span class="nu0">1</span>; i &lt;= l; ++i<span class="br0">&#41;</span></div></li><li><div class="de1">    <span class="br0">&#123;</span></div></li><li><div class="de1">        dp<span class="br0">&#91;</span>i%<span class="nu0">3</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> = i;</div></li><li class="li2"><div class="de2">        <span class="kw4">int</span> limit = min<span class="br0">&#40;</span>k, i + <span class="nu0">100</span><span class="br0">&#41;</span>;</div></li><li><div class="de1">        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> j = max<span class="br0">&#40;</span>i - <span class="nu0">100</span>, <span class="nu0">1</span><span class="br0">&#41;</span>; j &lt;= limit; ++j<span class="br0">&#41;</span></div></li><li><div class="de1">        <span class="br0">&#123;</span></div></li><li><div class="de1">            tmp_min = dp<span class="br0">&#91;</span><span class="br0">&#40;</span>i+<span class="nu0">3</span>-<span class="nu0">1</span><span class="br0">&#41;</span>%<span class="nu0">3</span><span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> + <span class="nu0">1</span>;</div></li><li><div class="de1">            <span class="kw1">if</span> <span class="br0">&#40;</span>tmp_min &gt; dp<span class="br0">&#91;</span>i%<span class="nu0">3</span><span class="br0">&#93;</span><span class="br0">&#91;</span>j-<span class="nu0">1</span><span class="br0">&#93;</span> + <span class="nu0">1</span><span class="br0">&#41;</span></div></li><li class="li2"><div class="de2">                tmp_min = dp<span class="br0">&#91;</span>i%<span class="nu0">3</span><span class="br0">&#93;</span><span class="br0">&#91;</span>j-<span class="nu0">1</span><span class="br0">&#93;</span> + <span class="nu0">1</span>;</div></li><li><div class="de1">            <span class="kw1">if</span> <span class="br0">&#40;</span>a<span class="br0">&#91;</span>i-<span class="nu0">1</span><span class="br0">&#93;</span> == b<span class="br0">&#91;</span>j-<span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span> <span class="co1">// a[i] == b[j]</span></div></li><li><div class="de1">            <span class="br0">&#123;</span></div></li><li><div class="de1">                <span class="kw1">if</span> <span class="br0">&#40;</span>tmp_min &gt; dp<span class="br0">&#91;</span><span class="br0">&#40;</span>i+<span class="nu0">3</span>-<span class="nu0">1</span><span class="br0">&#41;</span>%<span class="nu0">3</span><span class="br0">&#93;</span><span class="br0">&#91;</span>j-<span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span></div></li><li><div class="de1">                    tmp_min = dp<span class="br0">&#91;</span><span class="br0">&#40;</span>i+<span class="nu0">3</span>-<span class="nu0">1</span><span class="br0">&#41;</span>%<span class="nu0">3</span><span class="br0">&#93;</span><span class="br0">&#91;</span>j-<span class="nu0">1</span><span class="br0">&#93;</span>;</div></li><li class="li2"><div class="de2">            <span class="br0">&#125;</span></div></li><li><div class="de1">            <span class="kw1">if</span> <span class="br0">&#40;</span>a<span class="br0">&#91;</span>i-<span class="nu0">1</span><span class="br0">&#93;</span> != b<span class="br0">&#91;</span>j-<span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span> <span class="co1">// a[i] != b[j]</span></div></li><li><div class="de1">            <span class="br0">&#123;</span></div></li><li><div class="de1">                <span class="kw1">if</span> <span class="br0">&#40;</span>tmp_min &gt; dp<span class="br0">&#91;</span><span class="br0">&#40;</span>i+<span class="nu0">3</span>-<span class="nu0">1</span><span class="br0">&#41;</span>%<span class="nu0">3</span><span class="br0">&#93;</span><span class="br0">&#91;</span>j-<span class="nu0">1</span><span class="br0">&#93;</span> + <span class="nu0">1</span><span class="br0">&#41;</span></div></li><li><div class="de1">                    tmp_min = dp<span class="br0">&#91;</span><span class="br0">&#40;</span>i+<span class="nu0">3</span>-<span class="nu0">1</span><span class="br0">&#41;</span>%<span class="nu0">3</span><span class="br0">&#93;</span><span class="br0">&#91;</span>j-<span class="nu0">1</span><span class="br0">&#93;</span> + <span class="nu0">1</span>;</div></li><li class="li2"><div class="de2">            <span class="br0">&#125;</span></div></li><li><div class="de1">            <span class="kw1">if</span> <span class="br0">&#40;</span>i &gt;= <span class="nu0">2</span> &amp;&amp; j &gt;= <span class="nu0">2</span> &amp;&amp; a<span class="br0">&#91;</span>i-<span class="nu0">2</span><span class="br0">&#93;</span> == b<span class="br0">&#91;</span>j-<span class="nu0">1</span><span class="br0">&#93;</span> &amp;&amp; a<span class="br0">&#91;</span>i-<span class="nu0">1</span><span class="br0">&#93;</span> == b<span class="br0">&#91;</span>j-<span class="nu0">2</span><span class="br0">&#93;</span><span class="br0">&#41;</span></div></li><li><div class="de1">            <span class="br0">&#123;</span></div></li><li><div class="de1">                <span class="kw1">if</span> <span class="br0">&#40;</span>tmp_min &gt; dp<span class="br0">&#91;</span><span class="br0">&#40;</span>i+<span class="nu0">3</span>-<span class="nu0">2</span><span class="br0">&#41;</span>%<span class="nu0">3</span><span class="br0">&#93;</span><span class="br0">&#91;</span>j-<span class="nu0">2</span><span class="br0">&#93;</span> + <span class="nu0">1</span><span class="br0">&#41;</span></div></li><li><div class="de1">                    tmp_min = dp<span class="br0">&#91;</span><span class="br0">&#40;</span>i+<span class="nu0">3</span>-<span class="nu0">2</span><span class="br0">&#41;</span>%<span class="nu0">3</span><span class="br0">&#93;</span><span class="br0">&#91;</span>j-<span class="nu0">2</span><span class="br0">&#93;</span> + <span class="nu0">1</span>;</div></li><li class="li2"><div class="de2">            <span class="br0">&#125;</span></div></li><li><div class="de1">            dp<span class="br0">&#91;</span>i%<span class="nu0">3</span><span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> = tmp_min;</div></li><li><div class="de1">        <span class="br0">&#125;</span></div></li><li><div class="de1">    <span class="br0">&#125;</span></div></li><li><div class="de1">    <a href="http://www.opengroup.org/onlinepubs/009695399/functions/cout.html"><span class="kw3">cout</span></a> &lt;&lt; tmp_min &lt;&lt; endl;</div></li><li class="li2"><div class="de2">    <span class="kw1">return</span> <span class="nu0">0</span>;</div></li><li><div class="de1"><span class="br0">&#125;</span> </div></li></ol></pre></body></html>
+#include <algorithm>
+#include <cctype>
+#include <climits>
+#include <cmath>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <iostream>
+#include <list>
+#include <map>
+#include <queue>
+#include <set>
+#include <sstream>
+#include <string>
+#include <vector>
+#define inf 1000000000
+#define MAX 100001
+using namespace std;
+string a, b;
+int dp[3][MAX];
+int main()
+{
+    cin.sync_with_stdio(false);
+    int l, k;
+    cin >> l >> k;
+    cin >> a >> b;
+    for (int j = 1; j <= k; ++j)
+    {
+        dp[0][j] = j;
+    }
+    int tmp_min;
+    for (int i = 1; i <= l; ++i)
+    {
+        dp[i%3][0] = i;
+        int limit = min(k, i + 100);
+        for (int j = max(i - 100, 1); j <= limit; ++j)
+        {
+            tmp_min = dp[(i+3-1)%3][j] + 1;
+            if (tmp_min > dp[i%3][j-1] + 1)
+                tmp_min = dp[i%3][j-1] + 1;
+            if (a[i-1] == b[j-1]) // a[i] == b[j]
+            {
+                if (tmp_min > dp[(i+3-1)%3][j-1])
+                    tmp_min = dp[(i+3-1)%3][j-1];
+            }
+            if (a[i-1] != b[j-1]) // a[i] != b[j]
+            {
+                if (tmp_min > dp[(i+3-1)%3][j-1] + 1)
+                    tmp_min = dp[(i+3-1)%3][j-1] + 1;
+            }
+            if (i >= 2 && j >= 2 && a[i-2] == b[j-1] && a[i-1] == b[j-2])
+            {
+                if (tmp_min > dp[(i+3-2)%3][j-2] + 1)
+                    tmp_min = dp[(i+3-2)%3][j-2] + 1;
+            }
+            dp[i%3][j] = tmp_min;
+        }
+    }
+    cout << tmp_min << endl;
+    return 0;
+}

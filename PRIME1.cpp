@@ -1,22 +1,44 @@
+#include<stdio.h>
+
+#define max 32000
+
+int prime[max];
+int p[max];
+int main()
+{
 
 
-<html><head><meta http-equiv='Content-Type' content='text/html; charset=iso-8859-2'><title>SPOJ submission 12469644 (C++ 4.3.2)</title><style type='text/css'><!--/* GeSHi (c) Nigel McNie 2004 (http://qbnz.com/highlighter) */
-.cpp  {color: #000066; border: 1px solid #d0d0d0; background-color: #f0f0f0;}
-.cpp a:link {color: #000060;}
-.cpp a:hover {background-color: #f0f000;}
-.cpp .head {font-family: Verdana, Arial, sans-serif; color: #808080; font-size: 70%; font-weight: bold; background-color: #f0f0ff; border-bottom: 1px solid #d0d0d0; padding: 2px;}
-.cpp .imp {font-weight: bold; color: red;}
-.cpp .kw1 {color: #0000ff;}
-.cpp .kw2 {color: #0000ff;}
-.cpp .kw3 {color: #0000dd;}
-.cpp .kw4 {color: #0000ff;}
-.cpp .co1 {color: #ff0000;}
-.cpp .co2 {color: #339900;}
-.cpp .coMULTI {color: #ff0000; font-style: italic;}
-.cpp .es0 {color: #666666; font-weight: bold;}
-.cpp .br0 {color: #000000;}
-.cpp .st0 {color: #666666;}
-.cpp .nu0 {color: #0000dd;}
-.cpp .me1 {color: #00eeff;}
-.cpp .me2 {color: #00eeff;}
---></style></head><body><pre class="cpp"><div class="head">SPOJ submission 12469644 (C++ 4.3.2) <a href='/files/src/save/12469644'>plaintext</a> <a href='/status/PRIME1,samprit/'>list</a>. Status: AC, problem PRIME1, contest SPOJ. By samprit (Samprit Biswas), 2014-09-26 19:20:26.</div><ol><li><div class="de1"><span class="co2">#include&lt;stdio.h&gt;</span></div></li><li><div class="de1">&nbsp;</div></li><li><div class="de1"><span class="co2">#define max 32000</span></div></li><li><div class="de1">&nbsp;</div></li><li class="li2"><div class="de2"><span class="kw4">int</span> prime<span class="br0">&#91;</span>max<span class="br0">&#93;</span>;</div></li><li><div class="de1"><span class="kw4">int</span> p<span class="br0">&#91;</span>max<span class="br0">&#93;</span>;</div></li><li><div class="de1"><span class="kw4">int</span> main<span class="br0">&#40;</span><span class="br0">&#41;</span></div></li><li><div class="de1"><span class="br0">&#123;</span></div></li><li><div class="de1">&nbsp;</div></li><li class="li2"><div class="de2">&nbsp;</div></li><li><div class="de1">    <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> i=<span class="nu0">2</span>;i&lt;max;i++<span class="br0">&#41;</span>prime<span class="br0">&#91;</span>i<span class="br0">&#93;</span>=<span class="nu0">1</span>;</div></li><li><div class="de1">    <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> i=<span class="nu0">2</span>;i&lt;max;i++<span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">        <span class="kw1">if</span><span class="br0">&#40;</span>prime<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#41;</span></div></li><li><div class="de1">        <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> j=i;j*i&lt;max;j++<span class="br0">&#41;</span></div></li><li class="li2"><div class="de2">        prime<span class="br0">&#91;</span>i*j<span class="br0">&#93;</span>=<span class="nu0">0</span>;</div></li><li><div class="de1">    <span class="br0">&#125;</span></div></li><li><div class="de1">    <span class="kw4">int</span> j=<span class="nu0">0</span>;</div></li><li><div class="de1">    <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> i=<span class="nu0">2</span>;i&lt;max;i++<span class="br0">&#41;</span></div></li><li><div class="de1">    <span class="br0">&#123;</span></div></li><li class="li2"><div class="de2">        <span class="kw1">if</span><span class="br0">&#40;</span>prime<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#41;</span></div></li><li><div class="de1">        <span class="br0">&#123;</span></div></li><li><div class="de1">            p<span class="br0">&#91;</span>j++<span class="br0">&#93;</span>=i;</div></li><li><div class="de1">        <span class="br0">&#125;</span></div></li><li><div class="de1">    <span class="br0">&#125;</span></div></li><li class="li2"><div class="de2">    <span class="kw4">int</span> t,a,b;</div></li><li><div class="de1">    <a href="http://www.opengroup.org/onlinepubs/009695399/functions/scanf.html"><span class="kw3">scanf</span></a><span class="br0">&#40;</span><span class="st0">"%d"</span>,&amp;t<span class="br0">&#41;</span>;</div></li><li><div class="de1">    <span class="kw1">while</span><span class="br0">&#40;</span>t--<span class="br0">&#41;</span></div></li><li><div class="de1">    <span class="br0">&#123;</span></div></li><li><div class="de1">        <a href="http://www.opengroup.org/onlinepubs/009695399/functions/scanf.html"><span class="kw3">scanf</span></a><span class="br0">&#40;</span><span class="st0">"%d%d"</span>,&amp;a,&amp;b<span class="br0">&#41;</span>;</div></li><li class="li2"><div class="de2">        <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> i=a;i&lt;=b;i++<span class="br0">&#41;</span></div></li><li><div class="de1">        <span class="br0">&#123;</span></div></li><li><div class="de1">            <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> k=<span class="nu0">0</span>;p<span class="br0">&#91;</span>k<span class="br0">&#93;</span>*p<span class="br0">&#91;</span>k<span class="br0">&#93;</span>&lt;=i;k++<span class="br0">&#41;</span></div></li><li><div class="de1">            <span class="br0">&#123;</span></div></li><li><div class="de1">                <span class="kw1">if</span><span class="br0">&#40;</span>i%p<span class="br0">&#91;</span>k<span class="br0">&#93;</span>==<span class="nu0">0</span><span class="br0">&#41;</span></div></li><li class="li2"><div class="de2">                <span class="kw1">goto</span> out;</div></li><li><div class="de1">            <span class="br0">&#125;</span></div></li><li><div class="de1">            <span class="kw1">if</span><span class="br0">&#40;</span>i!=<span class="nu0">1</span><span class="br0">&#41;</span></div></li><li><div class="de1">            <a href="http://www.opengroup.org/onlinepubs/009695399/functions/printf.html"><span class="kw3">printf</span></a><span class="br0">&#40;</span><span class="st0">"%d<span class="es0">\n</span>"</span>,i<span class="br0">&#41;</span>;</div></li><li><div class="de1">            out:;</div></li><li class="li2"><div class="de2">        <span class="br0">&#125;</span></div></li><li><div class="de1">        <a href="http://www.opengroup.org/onlinepubs/009695399/functions/printf.html"><span class="kw3">printf</span></a><span class="br0">&#40;</span><span class="st0">"<span class="es0">\n</span>"</span><span class="br0">&#41;</span>;</div></li><li><div class="de1">    <span class="br0">&#125;</span></div></li><li><div class="de1">    <span class="kw1">return</span> <span class="nu0">0</span>;</div></li><li><div class="de1"><span class="br0">&#125;</span> </div></li></ol></pre></body></html>
+    for(int i=2;i<max;i++)prime[i]=1;
+    for(int i=2;i<max;i++){
+        if(prime[i])
+        for(int j=i;j*i<max;j++)
+        prime[i*j]=0;
+    }
+    int j=0;
+    for(int i=2;i<max;i++)
+    {
+        if(prime[i])
+        {
+            p[j++]=i;
+        }
+    }
+    int t,a,b;
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%d%d",&a,&b);
+        for(int i=a;i<=b;i++)
+        {
+            for(int k=0;p[k]*p[k]<=i;k++)
+            {
+                if(i%p[k]==0)
+                goto out;
+            }
+            if(i!=1)
+            printf("%d\n",i);
+            out:;
+        }
+        printf("\n");
+    }
+    return 0;
+}

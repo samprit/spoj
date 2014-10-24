@@ -1,22 +1,178 @@
+//Includes
+#include <vector>
+#include <queue>
+#include <map>
+#include <set>
+#include <utility> //Pair
+#include <algorithm>
+#include <sstream> // istringstream>> ostring stream<<
+#include <iostream>
+#include <iomanip>
+#include <cstdio>
+#include <cmath>
+#include <cstdlib>
+#include <cassert>
+#include <ctime>
+#include <cstring>
+#include <limits>
+#include <list>
+#include <string>
+#include <climits>
+using namespace std;
+ 
+//M lazy ;)
+#define ll long long
+typedef vector <int> vi;
+typedef pair< int ,int > pii;
+typedef istringstream iss;
+typedef ostringstream oss;
 
+#define pb push_back
+#define mp make_pair
+#define ff first
+#define ss second
+#define sz size()
+#define ln length()
+#define rep(i,n) for(int i=0;i<n;i++)
+#define fu(i,a,n) for(int i=a;i<=n;i++)
+#define fd(i,n,a) for(int i=n;i>=a;i--)
+#define all(a) a.begin(),a.end()
+#define ESP (1e-9)
+ 
+#define gi(n) scanf("%d",&n)
+#define gl(n) cin >> n
+#define pi(n) printf("%d",n)
+#define pl(n) cout << n
+#define ps printf(" ")
+#define pn printf("\n")
+#define dg(n,s); printf("%s %d",s,n)
+#define imax numeric_limits<int>::max()
+#define imin numeric_limits<int>::min()
+#define lmax numeric_limits<ll>::max()
+#define lmin numeric_limits<ll>::min()
+ 
+void assertOO(int a, int n, int b) {
+    assert( a <= n && n <= b );
+}
+  
+/*
+Set MAX according to the number of nodes in the graph. Remember,
+nodes are numbered from 1 to N. Set INF according to what is the
+maximum possible shortest path length going to be in the graph.
+This value should match with the default values for d[] array.
+*/
+const int MAX = 10001;
+const int INF = INT_MAX;
+ 
+/*
+pair object for graph is assumed to be (node, weight). d[] array
+holds the shortest path from the source. It contains INF if not
+reachable from the source.
+*/
+vector< pii > G[MAX];
+int d[MAX];
+ 
+/*
+The dijkstra routine. You can send a target node too along with
+the start node.
+*/
+void dijkstra(int start) {
+    int u, v, i, c, w;
+ 
+    /*
+    Instead of a custom comparator struct or class, we can use
+    the default comparator class greater<T> defined in quque.h
+    */
+    priority_queue< pii, vector< pii >, greater< pii > > Q;
+ 
+    /*
+    Reset the distance array and set INF as initial value. The
+    source node will have weight 0. We push (0, start) in the
+    priority queue as well that denotes start node has 0 weight.
+    */
+    //memset(d, 0x3f, sizeof d);
+    Q.push(pii(0, start));
+    d[start] = 0;
+ 
+    /*
+    As long as queue is not empty, check each adjacent node of u
+    */
+    while(!Q.empty()) {
+        u = Q.top().second; // node
+        c = Q.top().first; // node cost so far
+        Q.pop(); // remove the top item.
+ 
+        /*
+        We have discarded the visit array as we do not need it.
+        If d[u] has already a better value than the currently
+        popped node from queue, discard the operation on this node.
+        */
+        if(d[u] < c) continue;
+ 
+        /*
+        In case you have a target node, check if u == target node.
+        If yes you can early return d[u] at this point.
+        */
+ 
+        /*
+        Traverse the adjacent nodes of u. Remember, for the graph,,
+        the pair is assumed to be (node, weight). Can be done as
+        you like of course.
+        */
+        for(i = 0; i < G[u].size(); i++) {
+            v = G[u][i].first; // node
+            w = G[u][i].second; // edge weight
+ 
+            /*
+            Relax only if it improves the already computed shortest
+            path weight.
+            */
+            if(d[v] > d[u] + w) {
+                d[v] = d[u] + w;
+                Q.push(pii(d[v], v));
+            }
+        }
+    }
+}
+ 
+int main() {
 
-<html><head><meta http-equiv='Content-Type' content='text/html; charset=iso-8859-2'><title>SPOJ submission 12610190 (C++ 4.3.2)</title><style type='text/css'><!--/* GeSHi (c) Nigel McNie 2004 (http://qbnz.com/highlighter) */
-.cpp  {color: #000066; border: 1px solid #d0d0d0; background-color: #f0f0f0;}
-.cpp a:link {color: #000060;}
-.cpp a:hover {background-color: #f0f000;}
-.cpp .head {font-family: Verdana, Arial, sans-serif; color: #808080; font-size: 70%; font-weight: bold; background-color: #f0f0ff; border-bottom: 1px solid #d0d0d0; padding: 2px;}
-.cpp .imp {font-weight: bold; color: red;}
-.cpp .kw1 {color: #0000ff;}
-.cpp .kw2 {color: #0000ff;}
-.cpp .kw3 {color: #0000dd;}
-.cpp .kw4 {color: #0000ff;}
-.cpp .co1 {color: #ff0000;}
-.cpp .co2 {color: #339900;}
-.cpp .coMULTI {color: #ff0000; font-style: italic;}
-.cpp .es0 {color: #666666; font-weight: bold;}
-.cpp .br0 {color: #000000;}
-.cpp .st0 {color: #666666;}
-.cpp .nu0 {color: #0000dd;}
-.cpp .me1 {color: #00eeff;}
-.cpp .me2 {color: #00eeff;}
---></style></head><body><pre class="cpp"><div class="head">SPOJ submission 12610190 (C++ 4.3.2) <a href='/files/src/save/12610190'>plaintext</a> <a href='/status/SHPATH,samprit/'>list</a>. Status: AC, problem SHPATH, contest SPOJ. By samprit (Samprit Biswas), 2014-10-12 20:38:18.</div><ol><li><div class="de1"><span class="co1">//Includes</span></div></li><li><div class="de1"><span class="co2">#include &lt;vector&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;queue&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;map&gt;</span></div></li><li class="li2"><div class="de2"><span class="co2">#include &lt;set&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;utility&gt; //Pair</span></div></li><li><div class="de1"><span class="co2">#include &lt;algorithm&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;sstream&gt; // istringstream&gt;&gt; ostring stream&lt;&lt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;iostream&gt;</span></div></li><li class="li2"><div class="de2"><span class="co2">#include &lt;iomanip&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;cstdio&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;cmath&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;cstdlib&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;cassert&gt;</span></div></li><li class="li2"><div class="de2"><span class="co2">#include &lt;ctime&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;cstring&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;limits&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;list&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;string&gt;</span></div></li><li class="li2"><div class="de2"><span class="co2">#include &lt;climits&gt;</span></div></li><li><div class="de1"><span class="kw2">using</span> <span class="kw2">namespace</span> std;</div></li><li> </li><li><div class="de1"><span class="co1">//M lazy ;)</span></div></li><li><div class="de1"><span class="co2">#define ll long long</span></div></li><li class="li2"><div class="de2"><span class="kw4">typedef</span> vector &lt;int&gt; vi;</div></li><li><div class="de1"><span class="kw4">typedef</span> pair&lt; <span class="kw4">int</span> ,<span class="kw4">int</span> &gt; pii;</div></li><li><div class="de1"><span class="kw4">typedef</span> istringstream iss;</div></li><li><div class="de1"><span class="kw4">typedef</span> ostringstream oss;</div></li><li><div class="de1">&nbsp;</div></li><li class="li2"><div class="de2"><span class="co2">#define pb push_back</span></div></li><li><div class="de1"><span class="co2">#define mp make_pair</span></div></li><li><div class="de1"><span class="co2">#define ff first</span></div></li><li><div class="de1"><span class="co2">#define ss second</span></div></li><li><div class="de1"><span class="co2">#define sz size()</span></div></li><li class="li2"><div class="de2"><span class="co2">#define ln length()</span></div></li><li><div class="de1"><span class="co2">#define rep(i,n) for(int i=0;i&lt;n;i++)</span></div></li><li><div class="de1"><span class="co2">#define fu(i,a,n) for(int i=a;i&lt;=n;i++)</span></div></li><li><div class="de1"><span class="co2">#define fd(i,n,a) for(int i=n;i&gt;=a;i--)</span></div></li><li><div class="de1"><span class="co2">#define all(a) a.begin(),a.end()</span></div></li><li class="li2"><div class="de2"><span class="co2">#define ESP (1e-9)</span></div></li><li> </li><li><div class="de1"><span class="co2">#define gi(n) scanf(&quot;%d&quot;,&amp;n)</span></div></li><li><div class="de1"><span class="co2">#define gl(n) cin &gt;&gt; n</span></div></li><li><div class="de1"><span class="co2">#define pi(n) printf(&quot;%d&quot;,n)</span></div></li><li class="li2"><div class="de2"><span class="co2">#define pl(n) cout &lt;&lt; n</span></div></li><li><div class="de1"><span class="co2">#define ps printf(&quot; &quot;)</span></div></li><li><div class="de1"><span class="co2">#define pn printf(&quot;\n&quot;)</span></div></li><li><div class="de1"><span class="co2">#define dg(n,s); printf(&quot;%s %d&quot;,s,n)</span></div></li><li><div class="de1"><span class="co2">#define imax numeric_limits&lt;int&gt;::max()</span></div></li><li class="li2"><div class="de2"><span class="co2">#define imin numeric_limits&lt;int&gt;::min()</span></div></li><li><div class="de1"><span class="co2">#define lmax numeric_limits&lt;ll&gt;::max()</span></div></li><li><div class="de1"><span class="co2">#define lmin numeric_limits&lt;ll&gt;::min()</span></div></li><li> </li><li><div class="de1"><span class="kw4">void</span> assertOO<span class="br0">&#40;</span><span class="kw4">int</span> a, <span class="kw4">int</span> n, <span class="kw4">int</span> b<span class="br0">&#41;</span> <span class="br0">&#123;</span></div></li><li class="li2"><div class="de2">    <a href="http://www.opengroup.org/onlinepubs/009695399/functions/assert.html"><span class="kw3">assert</span></a><span class="br0">&#40;</span> a &lt;= n &amp;&amp; n &lt;= b <span class="br0">&#41;</span>;</div></li><li><div class="de1"><span class="br0">&#125;</span></div></li><li>  </li><li><div class="de1"><span class="coMULTI">/*</span></div></li><li><div class="de1"><span class="coMULTI">Set MAX according to the number of nodes in the graph. Remember,</span></div></li><li class="li2"><div class="de2"><span class="coMULTI">nodes are numbered from 1 to N. Set INF according to what is the</span></div></li><li><div class="de1"><span class="coMULTI">maximum possible shortest path length going to be in the graph.</span></div></li><li><div class="de1"><span class="coMULTI">This value should match with the default values for d[] array.</span></div></li><li><div class="de1"><span class="coMULTI">*/</span></div></li><li><div class="de1"><span class="kw4">const</span> <span class="kw4">int</span> MAX = <span class="nu0">10001</span>;</div></li><li class="li2"><div class="de2"><span class="kw4">const</span> <span class="kw4">int</span> INF = <span class="kw2">INT_MAX</span>;</div></li><li> </li><li><div class="de1"><span class="coMULTI">/*</span></div></li><li><div class="de1"><span class="coMULTI">pair object for graph is assumed to be (node, weight). d[] array</span></div></li><li><div class="de1"><span class="coMULTI">holds the shortest path from the source. It contains INF if not</span></div></li><li class="li2"><div class="de2"><span class="coMULTI">reachable from the source.</span></div></li><li><div class="de1"><span class="coMULTI">*/</span></div></li><li><div class="de1">vector&lt; pii &gt; G<span class="br0">&#91;</span>MAX<span class="br0">&#93;</span>;</div></li><li><div class="de1"><span class="kw4">int</span> d<span class="br0">&#91;</span>MAX<span class="br0">&#93;</span>;</div></li><li> </li><li class="li2"><div class="de2"><span class="coMULTI">/*</span></div></li><li><div class="de1"><span class="coMULTI">The dijkstra routine. You can send a target node too along with</span></div></li><li><div class="de1"><span class="coMULTI">the start node.</span></div></li><li><div class="de1"><span class="coMULTI">*/</span></div></li><li><div class="de1"><span class="kw4">void</span> dijkstra<span class="br0">&#40;</span><span class="kw4">int</span> start<span class="br0">&#41;</span> <span class="br0">&#123;</span></div></li><li class="li2"><div class="de2">    <span class="kw4">int</span> u, v, i, c, w;</div></li><li> </li><li><div class="de1">    <span class="coMULTI">/*</span></div></li><li><div class="de1"><span class="coMULTI">    Instead of a custom comparator struct or class, we can use</span></div></li><li><div class="de1"><span class="coMULTI">    the default comparator class greater&lt;T&gt; defined in quque.h</span></div></li><li class="li2"><div class="de2"><span class="coMULTI">    */</span></div></li><li><div class="de1">    priority_queue&lt; pii, vector&lt; pii &gt;, greater&lt; pii &gt; &gt; Q;</div></li><li> </li><li><div class="de1">    <span class="coMULTI">/*</span></div></li><li><div class="de1"><span class="coMULTI">    Reset the distance array and set INF as initial value. The</span></div></li><li class="li2"><div class="de2"><span class="coMULTI">    source node will have weight 0. We push (0, start) in the</span></div></li><li><div class="de1"><span class="coMULTI">    priority queue as well that denotes start node has 0 weight.</span></div></li><li><div class="de1"><span class="coMULTI">    */</span></div></li><li><div class="de1">    <span class="co1">//memset(d, 0x3f, sizeof d);</span></div></li><li><div class="de1">    Q.<span class="me1">push</span><span class="br0">&#40;</span>pii<span class="br0">&#40;</span><span class="nu0">0</span>, start<span class="br0">&#41;</span><span class="br0">&#41;</span>;</div></li><li class="li2"><div class="de2">    d<span class="br0">&#91;</span>start<span class="br0">&#93;</span> = <span class="nu0">0</span>;</div></li><li> </li><li><div class="de1">    <span class="coMULTI">/*</span></div></li><li><div class="de1"><span class="coMULTI">    As long as queue is not empty, check each adjacent node of u</span></div></li><li><div class="de1"><span class="coMULTI">    */</span></div></li><li class="li2"><div class="de2">    <span class="kw1">while</span><span class="br0">&#40;</span>!Q.<span class="me1">empty</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span></div></li><li><div class="de1">        u = Q.<span class="me1">top</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">second</span>; <span class="co1">// node</span></div></li><li><div class="de1">        c = Q.<span class="me1">top</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">first</span>; <span class="co1">// node cost so far</span></div></li><li><div class="de1">        Q.<span class="me1">pop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>; <span class="co1">// remove the top item.</span></div></li><li> </li><li class="li2"><div class="de2">        <span class="coMULTI">/*</span></div></li><li><div class="de1"><span class="coMULTI">        We have discarded the visit array as we do not need it.</span></div></li><li><div class="de1"><span class="coMULTI">        If d[u] has already a better value than the currently</span></div></li><li><div class="de1"><span class="coMULTI">        popped node from queue, discard the operation on this node.</span></div></li><li><div class="de1"><span class="coMULTI">        */</span></div></li><li class="li2"><div class="de2">        <span class="kw1">if</span><span class="br0">&#40;</span>d<span class="br0">&#91;</span>u<span class="br0">&#93;</span> &lt; c<span class="br0">&#41;</span> <span class="kw1">continue</span>;</div></li><li> </li><li><div class="de1">        <span class="coMULTI">/*</span></div></li><li><div class="de1"><span class="coMULTI">        In case you have a target node, check if u == target node.</span></div></li><li><div class="de1"><span class="coMULTI">        If yes you can early return d[u] at this point.</span></div></li><li class="li2"><div class="de2"><span class="coMULTI">        */</span></div></li><li> </li><li><div class="de1">        <span class="coMULTI">/*</span></div></li><li><div class="de1"><span class="coMULTI">        Traverse the adjacent nodes of u. Remember, for the graph,,</span></div></li><li><div class="de1"><span class="coMULTI">        the pair is assumed to be (node, weight). Can be done as</span></div></li><li class="li2"><div class="de2"><span class="coMULTI">        you like of course.</span></div></li><li><div class="de1"><span class="coMULTI">        */</span></div></li><li><div class="de1">        <span class="kw1">for</span><span class="br0">&#40;</span>i = <span class="nu0">0</span>; i &lt; G<span class="br0">&#91;</span>u<span class="br0">&#93;</span>.<span class="me1">size</span><span class="br0">&#40;</span><span class="br0">&#41;</span>; i++<span class="br0">&#41;</span> <span class="br0">&#123;</span></div></li><li><div class="de1">            v = G<span class="br0">&#91;</span>u<span class="br0">&#93;</span><span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">first</span>; <span class="co1">// node</span></div></li><li><div class="de1">            w = G<span class="br0">&#91;</span>u<span class="br0">&#93;</span><span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">second</span>; <span class="co1">// edge weight</span></div></li><li class="li2"> </li><li><div class="de1">            <span class="coMULTI">/*</span></div></li><li><div class="de1"><span class="coMULTI">            Relax only if it improves the already computed shortest</span></div></li><li><div class="de1"><span class="coMULTI">            path weight.</span></div></li><li><div class="de1"><span class="coMULTI">            */</span></div></li><li class="li2"><div class="de2">            <span class="kw1">if</span><span class="br0">&#40;</span>d<span class="br0">&#91;</span>v<span class="br0">&#93;</span> &gt; d<span class="br0">&#91;</span>u<span class="br0">&#93;</span> + w<span class="br0">&#41;</span> <span class="br0">&#123;</span></div></li><li><div class="de1">                d<span class="br0">&#91;</span>v<span class="br0">&#93;</span> = d<span class="br0">&#91;</span>u<span class="br0">&#93;</span> + w;</div></li><li><div class="de1">                Q.<span class="me1">push</span><span class="br0">&#40;</span>pii<span class="br0">&#40;</span>d<span class="br0">&#91;</span>v<span class="br0">&#93;</span>, v<span class="br0">&#41;</span><span class="br0">&#41;</span>;</div></li><li><div class="de1">            <span class="br0">&#125;</span></div></li><li><div class="de1">        <span class="br0">&#125;</span></div></li><li class="li2"><div class="de2">    <span class="br0">&#125;</span></div></li><li><div class="de1"><span class="br0">&#125;</span></div></li><li> </li><li><div class="de1"><span class="kw4">int</span> main<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span></div></li><li><div class="de1">&nbsp;</div></li><li class="li2"><div class="de2">    <span class="kw4">int</span> T, N,E,i,j;</div></li><li><div class="de1">    <a href="http://www.opengroup.org/onlinepubs/009695399/functions/scanf.html"><span class="kw3">scanf</span></a><span class="br0">&#40;</span><span class="st0">"%d"</span>,&amp;T<span class="br0">&#41;</span>;</div></li><li><div class="de1">&nbsp;</div></li><li><div class="de1">    assertOO<span class="br0">&#40;</span><span class="nu0">0</span>,T,<span class="nu0">10001</span><span class="br0">&#41;</span>;</div></li><li><div class="de1">    <span class="kw1">while</span><span class="br0">&#40;</span>T--<span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li class="li2"><div class="de2">        <a href="http://www.opengroup.org/onlinepubs/009695399/functions/scanf.html"><span class="kw3">scanf</span></a><span class="br0">&#40;</span><span class="st0">"%d"</span>,&amp;N<span class="br0">&#41;</span>;</div></li><li><div class="de1">&nbsp;</div></li><li><div class="de1">        <span class="kw1">for</span><span class="br0">&#40;</span>i=<span class="nu0">0</span>;i&lt;N;i++<span class="br0">&#41;</span> G<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">clear</span><span class="br0">&#40;</span><span class="br0">&#41;</span>;</div></li><li><div class="de1">&nbsp;</div></li><li><div class="de1">        map&lt;string, int&gt; city;</div></li><li class="li2"><div class="de2">        <span class="kw4">char</span> temp<span class="br0">&#91;</span><span class="nu0">20</span><span class="br0">&#93;</span>;</div></li><li><div class="de1">        <span class="kw4">int</span> edges, to, cost;</div></li><li><div class="de1">        <span class="kw1">for</span><span class="br0">&#40;</span>i=<span class="nu0">0</span>;i&lt;N;i++<span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">&nbsp;</div></li><li><div class="de1">            <a href="http://www.opengroup.org/onlinepubs/009695399/functions/scanf.html"><span class="kw3">scanf</span></a><span class="br0">&#40;</span><span class="st0">"%s"</span>,temp<span class="br0">&#41;</span>;</div></li><li class="li2"><div class="de2">            city<span class="br0">&#91;</span>string<span class="br0">&#40;</span>temp<span class="br0">&#41;</span><span class="br0">&#93;</span> = i;</div></li><li><div class="de1">&nbsp;</div></li><li><div class="de1">            <a href="http://www.opengroup.org/onlinepubs/009695399/functions/scanf.html"><span class="kw3">scanf</span></a><span class="br0">&#40;</span><span class="st0">"%d"</span>,&amp;edges<span class="br0">&#41;</span>;</div></li><li><div class="de1">&nbsp;</div></li><li><div class="de1">            <span class="kw1">for</span><span class="br0">&#40;</span>j=<span class="nu0">0</span>;j&lt;edges;j++<span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li class="li2"><div class="de2">                <a href="http://www.opengroup.org/onlinepubs/009695399/functions/scanf.html"><span class="kw3">scanf</span></a><span class="br0">&#40;</span><span class="st0">"%d %d"</span>,&amp;to, &amp;cost<span class="br0">&#41;</span>;</div></li><li><div class="de1">                G<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">push_back</span><span class="br0">&#40;</span>pii<span class="br0">&#40;</span>to-<span class="nu0">1</span>, cost<span class="br0">&#41;</span><span class="br0">&#41;</span>;</div></li><li><div class="de1">            <span class="br0">&#125;</span></div></li><li><div class="de1">        <span class="br0">&#125;</span></div></li><li><div class="de1">        <span class="kw4">int</span> pathsToFind;</div></li><li class="li2"><div class="de2">        <a href="http://www.opengroup.org/onlinepubs/009695399/functions/scanf.html"><span class="kw3">scanf</span></a><span class="br0">&#40;</span><span class="st0">"%d"</span>,&amp;pathsToFind<span class="br0">&#41;</span>;</div></li><li><div class="de1">&nbsp;</div></li><li><div class="de1">        <span class="kw1">for</span><span class="br0">&#40;</span>j=<span class="nu0">0</span>;j&lt;pathsToFind;j++<span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">            <span class="kw1">for</span><span class="br0">&#40;</span>i=<span class="nu0">0</span>;i&lt;N;i++<span class="br0">&#41;</span> d<span class="br0">&#91;</span>i<span class="br0">&#93;</span> = <span class="kw2">INT_MAX</span>;</div></li><li><div class="de1">&nbsp;</div></li><li class="li2"><div class="de2">            <span class="kw4">char</span> fr<span class="br0">&#91;</span><span class="nu0">20</span><span class="br0">&#93;</span>, toCity<span class="br0">&#91;</span><span class="nu0">20</span><span class="br0">&#93;</span>;</div></li><li><div class="de1">            <a href="http://www.opengroup.org/onlinepubs/009695399/functions/scanf.html"><span class="kw3">scanf</span></a><span class="br0">&#40;</span><span class="st0">"%s %s"</span>,fr, toCity<span class="br0">&#41;</span>;</div></li><li><div class="de1">            dijkstra<span class="br0">&#40;</span>city<span class="br0">&#91;</span>string<span class="br0">&#40;</span>fr<span class="br0">&#41;</span><span class="br0">&#93;</span><span class="br0">&#41;</span>;</div></li><li><div class="de1">            <span class="kw4">int</span> endCity = city<span class="br0">&#91;</span>string<span class="br0">&#40;</span>toCity<span class="br0">&#41;</span><span class="br0">&#93;</span>;</div></li><li><div class="de1">            <a href="http://www.opengroup.org/onlinepubs/009695399/functions/printf.html"><span class="kw3">printf</span></a><span class="br0">&#40;</span><span class="st0">"%d<span class="es0">\n</span>"</span>, d<span class="br0">&#91;</span>endCity<span class="br0">&#93;</span><span class="br0">&#41;</span>;</div></li><li class="li2"><div class="de2">        <span class="br0">&#125;</span></div></li><li><div class="de1">    <span class="br0">&#125;</span></div></li><li><div class="de1">    <span class="kw1">return</span> <span class="nu0">0</span>;</div></li><li><div class="de1"><span class="br0">&#125;</span> </div></li></ol></pre></body></html>
+    int T, N,E,i,j;
+    scanf("%d",&T);
+
+    assertOO(0,T,10001);
+    while(T--){
+        scanf("%d",&N);
+
+        for(i=0;i<N;i++) G[i].clear();
+
+        map<string, int> city;
+        char temp[20];
+        int edges, to, cost;
+        for(i=0;i<N;i++){
+
+            scanf("%s",temp);
+            city[string(temp)] = i;
+
+            scanf("%d",&edges);
+
+            for(j=0;j<edges;j++){
+                scanf("%d %d",&to, &cost);
+                G[i].push_back(pii(to-1, cost));
+            }
+        }
+        int pathsToFind;
+        scanf("%d",&pathsToFind);
+
+        for(j=0;j<pathsToFind;j++){
+            for(i=0;i<N;i++) d[i] = INT_MAX;
+
+            char fr[20], toCity[20];
+            scanf("%s %s",fr, toCity);
+            dijkstra(city[string(fr)]);
+            int endCity = city[string(toCity)];
+            printf("%d\n", d[endCity]);
+        }
+    }
+    return 0;
+}

@@ -1,22 +1,55 @@
+#include <stdlib.h>     /* atol */
+#include <iostream>
+#include <cstdio>
+#include <string>
+#include <queue>
+#include <stack>
+#include <algorithm>
+#include <cmath>
+#include <map>
 
+#define ll long long
+#define ull unsigned long long
 
-<html><head><meta http-equiv='Content-Type' content='text/html; charset=iso-8859-2'><title>SPOJ submission 12520567 (C++ 4.3.2)</title><style type='text/css'><!--/* GeSHi (c) Nigel McNie 2004 (http://qbnz.com/highlighter) */
-.cpp  {color: #000066; border: 1px solid #d0d0d0; background-color: #f0f0f0;}
-.cpp a:link {color: #000060;}
-.cpp a:hover {background-color: #f0f000;}
-.cpp .head {font-family: Verdana, Arial, sans-serif; color: #808080; font-size: 70%; font-weight: bold; background-color: #f0f0ff; border-bottom: 1px solid #d0d0d0; padding: 2px;}
-.cpp .imp {font-weight: bold; color: red;}
-.cpp .kw1 {color: #0000ff;}
-.cpp .kw2 {color: #0000ff;}
-.cpp .kw3 {color: #0000dd;}
-.cpp .kw4 {color: #0000ff;}
-.cpp .co1 {color: #ff0000;}
-.cpp .co2 {color: #339900;}
-.cpp .coMULTI {color: #ff0000; font-style: italic;}
-.cpp .es0 {color: #666666; font-weight: bold;}
-.cpp .br0 {color: #000000;}
-.cpp .st0 {color: #666666;}
-.cpp .nu0 {color: #0000dd;}
-.cpp .me1 {color: #00eeff;}
-.cpp .me2 {color: #00eeff;}
---></style></head><body><pre class="cpp"><div class="head">SPOJ submission 12520567 (C++ 4.3.2) <a href='/files/src/save/12520567'>plaintext</a> <a href='/status/ABSYS,samprit/'>list</a>. Status: AC, problem ABSYS, contest SPOJ. By samprit (Samprit Biswas), 2014-10-02 14:50:22.</div><ol><li><div class="de1"><span class="co2">#include &lt;stdlib.h&gt;     /* atol */</span></div></li><li><div class="de1"><span class="co2">#include &lt;iostream&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;cstdio&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;string&gt;</span></div></li><li class="li2"><div class="de2"><span class="co2">#include &lt;queue&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;stack&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;algorithm&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;cmath&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;map&gt;</span></div></li><li class="li2"><div class="de2">&nbsp;</div></li><li><div class="de1"><span class="co2">#define ll long long</span></div></li><li><div class="de1"><span class="co2">#define ull unsigned long long</span></div></li><li><div class="de1">&nbsp;</div></li><li><div class="de1"><span class="kw2">using</span> <span class="kw2">namespace</span> std;</div></li><li class="li2"><div class="de2">&nbsp;</div></li><li><div class="de1"><span class="kw4">int</span> main<span class="br0">&#40;</span><span class="br0">&#41;</span></div></li><li><div class="de1"><span class="br0">&#123;</span></div></li><li><div class="de1">	<span class="kw4">int</span> T;</div></li><li><div class="de1">	cin&gt;&gt;T;</div></li><li class="li2"><div class="de2">&nbsp;</div></li><li><div class="de1">	<span class="kw1">while</span><span class="br0">&#40;</span>T--<span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">		string op1, op2, plus, equal, result;</div></li><li><div class="de1">		cin&gt;&gt;op1&gt;&gt;plus&gt;&gt;op2&gt;&gt;equal&gt;&gt;result;</div></li><li>		</li><li class="li2"><div class="de2">&nbsp;</div></li><li><div class="de1">		ll <span class="kw4">int</span> op1Int, op2Int, resultInt;</div></li><li><div class="de1">		<span class="kw4">int</span> flag=<span class="nu0">0</span>;</div></li><li><div class="de1">&nbsp;</div></li><li><div class="de1">		<span class="kw1">if</span><span class="br0">&#40;</span>op1.<span class="me1">find</span><span class="br0">&#40;</span><span class="st0">'m'</span><span class="br0">&#41;</span> != string::<span class="me2">npos</span><span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li class="li2"><div class="de2">			flag=<span class="nu0">1</span>;</div></li><li><div class="de1">		<span class="br0">&#125;</span><span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>op2.<span class="me1">find</span><span class="br0">&#40;</span><span class="st0">'m'</span><span class="br0">&#41;</span> != string::<span class="me2">npos</span><span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">			flag=<span class="nu0">2</span>;</div></li><li><div class="de1">		<span class="br0">&#125;</span><span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>result.<span class="me1">find</span><span class="br0">&#40;</span><span class="st0">'m'</span><span class="br0">&#41;</span> != string::<span class="me2">npos</span><span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">			flag=<span class="nu0">3</span>;</div></li><li class="li2"><div class="de2">		<span class="br0">&#125;</span></div></li><li><div class="de1">&nbsp;</div></li><li><div class="de1">		op1Int = <a href="http://www.opengroup.org/onlinepubs/009695399/functions/atol.html"><span class="kw3">atol</span></a><span class="br0">&#40;</span>op1.<span class="me1">c_str</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>;</div></li><li><div class="de1">		op2Int = <a href="http://www.opengroup.org/onlinepubs/009695399/functions/atol.html"><span class="kw3">atol</span></a><span class="br0">&#40;</span>op2.<span class="me1">c_str</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>;</div></li><li><div class="de1">		resultInt = <a href="http://www.opengroup.org/onlinepubs/009695399/functions/atol.html"><span class="kw3">atol</span></a><span class="br0">&#40;</span>result.<span class="me1">c_str</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>;</div></li><li class="li2">		</li><li><div class="de1">		<span class="co1">//cout&lt;&lt;op1Int&lt;&lt;&quot; &quot;&lt;&lt;plus&lt;&lt;&quot; &quot;&lt;&lt;op2Int&lt;&lt;&quot; &quot;&lt;&lt;equal&lt;&lt;&quot; &quot;&lt;&lt;resultInt&lt;&lt;endl;</span></div></li><li>		</li><li><div class="de1">  		<span class="kw1">if</span> <span class="br0">&#40;</span>flag==<span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">  			cout&lt;&lt;op1Int&lt;&lt;<span class="st0">" "</span>&lt;&lt;plus&lt;&lt;<span class="st0">" "</span>&lt;&lt;op2Int&lt;&lt;<span class="st0">" "</span>&lt;&lt;equal&lt;&lt;<span class="st0">" "</span>&lt;&lt;resultInt&lt;&lt;endl;</div></li><li class="li2"><div class="de2">  		<span class="br0">&#125;</span><span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>flag==<span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">  			cout&lt;&lt;resultInt-op2Int&lt;&lt;<span class="st0">" "</span>&lt;&lt;plus&lt;&lt;<span class="st0">" "</span>&lt;&lt;op2Int&lt;&lt;<span class="st0">" "</span>&lt;&lt;equal&lt;&lt;<span class="st0">" "</span>&lt;&lt;resultInt&lt;&lt;endl;</div></li><li><div class="de1">  		<span class="br0">&#125;</span><span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>flag==<span class="nu0">2</span><span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">  			cout&lt;&lt;op1Int&lt;&lt;<span class="st0">" "</span>&lt;&lt;plus&lt;&lt;<span class="st0">" "</span>&lt;&lt;resultInt - op1Int&lt;&lt;<span class="st0">" "</span>&lt;&lt;equal&lt;&lt;<span class="st0">" "</span>&lt;&lt;resultInt&lt;&lt;endl;</div></li><li><div class="de1">  		<span class="br0">&#125;</span><span class="kw1">else</span><span class="br0">&#123;</span></div></li><li class="li2"><div class="de2">  			cout&lt;&lt;op1Int&lt;&lt;<span class="st0">" "</span>&lt;&lt;plus&lt;&lt;<span class="st0">" "</span>&lt;&lt;op2Int&lt;&lt;<span class="st0">" "</span>&lt;&lt;equal&lt;&lt;<span class="st0">" "</span>&lt;&lt;op1Int + op2Int&lt;&lt;endl;</div></li><li><div class="de1">  		<span class="br0">&#125;</span></div></li><li><div class="de1">&nbsp;</div></li><li><div class="de1">	<span class="br0">&#125;</span></div></li><li><div class="de1">    <span class="kw1">return</span> <span class="nu0">0</span>;</div></li><li class="li2"><div class="de2"><span class="br0">&#125;</span> </div></li></ol></pre></body></html>
+using namespace std;
+
+int main()
+{
+	int T;
+	cin>>T;
+
+	while(T--){
+		string op1, op2, plus, equal, result;
+		cin>>op1>>plus>>op2>>equal>>result;
+		
+
+		ll int op1Int, op2Int, resultInt;
+		int flag=0;
+
+		if(op1.find('m') != string::npos){
+			flag=1;
+		}else if(op2.find('m') != string::npos){
+			flag=2;
+		}else if(result.find('m') != string::npos){
+			flag=3;
+		}
+
+		op1Int = atol(op1.c_str());
+		op2Int = atol(op2.c_str());
+		resultInt = atol(result.c_str());
+		
+		//cout<<op1Int<<" "<<plus<<" "<<op2Int<<" "<<equal<<" "<<resultInt<<endl;
+		
+  		if (flag==0){
+  			cout<<op1Int<<" "<<plus<<" "<<op2Int<<" "<<equal<<" "<<resultInt<<endl;
+  		}else if(flag==1){
+  			cout<<resultInt-op2Int<<" "<<plus<<" "<<op2Int<<" "<<equal<<" "<<resultInt<<endl;
+  		}else if(flag==2){
+  			cout<<op1Int<<" "<<plus<<" "<<resultInt - op1Int<<" "<<equal<<" "<<resultInt<<endl;
+  		}else{
+  			cout<<op1Int<<" "<<plus<<" "<<op2Int<<" "<<equal<<" "<<op1Int + op2Int<<endl;
+  		}
+
+	}
+    return 0;
+}

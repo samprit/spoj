@@ -1,22 +1,47 @@
+#include <cstdio>
 
+using namespace std;
 
-<html><head><meta http-equiv='Content-Type' content='text/html; charset=iso-8859-2'><title>SPOJ submission 12508318 (C++ 4.3.2)</title><style type='text/css'><!--/* GeSHi (c) Nigel McNie 2004 (http://qbnz.com/highlighter) */
-.cpp  {color: #000066; border: 1px solid #d0d0d0; background-color: #f0f0f0;}
-.cpp a:link {color: #000060;}
-.cpp a:hover {background-color: #f0f000;}
-.cpp .head {font-family: Verdana, Arial, sans-serif; color: #808080; font-size: 70%; font-weight: bold; background-color: #f0f0ff; border-bottom: 1px solid #d0d0d0; padding: 2px;}
-.cpp .imp {font-weight: bold; color: red;}
-.cpp .kw1 {color: #0000ff;}
-.cpp .kw2 {color: #0000ff;}
-.cpp .kw3 {color: #0000dd;}
-.cpp .kw4 {color: #0000ff;}
-.cpp .co1 {color: #ff0000;}
-.cpp .co2 {color: #339900;}
-.cpp .coMULTI {color: #ff0000; font-style: italic;}
-.cpp .es0 {color: #666666; font-weight: bold;}
-.cpp .br0 {color: #000000;}
-.cpp .st0 {color: #666666;}
-.cpp .nu0 {color: #0000dd;}
-.cpp .me1 {color: #00eeff;}
-.cpp .me2 {color: #00eeff;}
---></style></head><body><pre class="cpp"><div class="head">SPOJ submission 12508318 (C++ 4.3.2) <a href='/files/src/save/12508318'>plaintext</a> <a href='/status/ACS,samprit/'>list</a>. Status: AC, problem ACS, contest SPOJ. By samprit (Samprit Biswas), 2014-10-01 10:43:51.</div><ol><li><div class="de1"><span class="co2">#include &lt;cstdio&gt;</span></div></li><li><div class="de1">&nbsp;</div></li><li><div class="de1"><span class="kw2">using</span> <span class="kw2">namespace</span> std;</div></li><li><div class="de1">&nbsp;</div></li><li class="li2"><div class="de2"><span class="kw4">int</span> main<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">    <span class="kw4">char</span> op;</div></li><li><div class="de1">    <span class="kw4">int</span> x,y,z,r<span class="br0">&#91;</span><span class="nu0">1235</span><span class="br0">&#93;</span>,c<span class="br0">&#91;</span><span class="nu0">5679</span><span class="br0">&#93;</span>;</div></li><li><div class="de1">    <span class="kw4">int</span> revr<span class="br0">&#91;</span><span class="nu0">1235</span><span class="br0">&#93;</span>,revc<span class="br0">&#91;</span><span class="nu0">5679</span><span class="br0">&#93;</span>;</div></li><li>    </li><li class="li2"><div class="de2">    <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> i = <span class="nu0">1</span>;i &lt;= <span class="nu0">1234</span>;++i<span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">        r<span class="br0">&#91;</span>i<span class="br0">&#93;</span> = i;</div></li><li><div class="de1">        revr<span class="br0">&#91;</span>i<span class="br0">&#93;</span> = i;</div></li><li><div class="de1">    <span class="br0">&#125;</span></div></li><li>    </li><li class="li2"><div class="de2">    <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> i = <span class="nu0">1</span>;i &lt;= <span class="nu0">5678</span>;++i<span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">        c<span class="br0">&#91;</span>i<span class="br0">&#93;</span> = i;</div></li><li><div class="de1">        revc<span class="br0">&#91;</span>i<span class="br0">&#93;</span> = i;</div></li><li><div class="de1">    <span class="br0">&#125;</span></div></li><li>    </li><li class="li2"><div class="de2">    <span class="kw1">while</span><span class="br0">&#40;</span>~<a href="http://www.opengroup.org/onlinepubs/009695399/functions/scanf.html"><span class="kw3">scanf</span></a><span class="br0">&#40;</span><span class="st0">" %c"</span>,&amp;op<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">        <span class="kw1">if</span><span class="br0">&#40;</span>op == <span class="st0">'R'</span><span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">            <a href="http://www.opengroup.org/onlinepubs/009695399/functions/scanf.html"><span class="kw3">scanf</span></a><span class="br0">&#40;</span><span class="st0">"%d %d"</span>,&amp;x,&amp;y<span class="br0">&#41;</span>;</div></li><li>            </li><li><div class="de1">            <span class="kw4">int</span> r1 = r<span class="br0">&#91;</span>x<span class="br0">&#93;</span>,r2 = r<span class="br0">&#91;</span>y<span class="br0">&#93;</span>;</div></li><li class="li2">            </li><li><div class="de1">            r<span class="br0">&#91;</span>x<span class="br0">&#93;</span> = r2; revr<span class="br0">&#91;</span>r2<span class="br0">&#93;</span> = x;</div></li><li><div class="de1">            r<span class="br0">&#91;</span>y<span class="br0">&#93;</span> = r1; revr<span class="br0">&#91;</span>r1<span class="br0">&#93;</span> = y;</div></li><li><div class="de1">        <span class="br0">&#125;</span><span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>op == <span class="st0">'C'</span><span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">            <a href="http://www.opengroup.org/onlinepubs/009695399/functions/scanf.html"><span class="kw3">scanf</span></a><span class="br0">&#40;</span><span class="st0">"%d %d"</span>,&amp;x,&amp;y<span class="br0">&#41;</span>;</div></li><li class="li2">            </li><li><div class="de1">            <span class="kw4">int</span> c1 = c<span class="br0">&#91;</span>x<span class="br0">&#93;</span>,c2 = c<span class="br0">&#91;</span>y<span class="br0">&#93;</span>;</div></li><li>            </li><li><div class="de1">            c<span class="br0">&#91;</span>x<span class="br0">&#93;</span> = c2; revc<span class="br0">&#91;</span>c2<span class="br0">&#93;</span> = x;</div></li><li><div class="de1">            c<span class="br0">&#91;</span>y<span class="br0">&#93;</span> = c1; revc<span class="br0">&#91;</span>c1<span class="br0">&#93;</span> = y;</div></li><li class="li2"><div class="de2">        <span class="br0">&#125;</span><span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>op == <span class="st0">'Q'</span><span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">            <a href="http://www.opengroup.org/onlinepubs/009695399/functions/scanf.html"><span class="kw3">scanf</span></a><span class="br0">&#40;</span><span class="st0">"%d %d"</span>,&amp;x,&amp;y<span class="br0">&#41;</span>;</div></li><li><div class="de1">            <a href="http://www.opengroup.org/onlinepubs/009695399/functions/printf.html"><span class="kw3">printf</span></a><span class="br0">&#40;</span><span class="st0">"%d<span class="es0">\n</span>"</span>,<span class="br0">&#40;</span>r<span class="br0">&#91;</span>x<span class="br0">&#93;</span> - <span class="nu0">1</span><span class="br0">&#41;</span> * <span class="nu0">5678</span> + c<span class="br0">&#91;</span>y<span class="br0">&#93;</span><span class="br0">&#41;</span>;</div></li><li><div class="de1">        <span class="br0">&#125;</span><span class="kw1">else</span><span class="br0">&#123;</span></div></li><li><div class="de1">            <a href="http://www.opengroup.org/onlinepubs/009695399/functions/scanf.html"><span class="kw3">scanf</span></a><span class="br0">&#40;</span><span class="st0">"%d"</span>,&amp;z<span class="br0">&#41;</span>;</div></li><li class="li2"><div class="de2">            --z;</div></li><li>            </li><li><div class="de1">            x = z / <span class="nu0">5678</span>; y = z % <span class="nu0">5678</span>;</div></li><li>            </li><li><div class="de1">            <a href="http://www.opengroup.org/onlinepubs/009695399/functions/printf.html"><span class="kw3">printf</span></a><span class="br0">&#40;</span><span class="st0">"%d %d<span class="es0">\n</span>"</span>,revr<span class="br0">&#91;</span>x + <span class="nu0">1</span><span class="br0">&#93;</span>,revc<span class="br0">&#91;</span>y + <span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span>;</div></li><li class="li2"><div class="de2">        <span class="br0">&#125;</span></div></li><li><div class="de1">    <span class="br0">&#125;</span></div></li><li><div class="de1"><span class="br0">&#125;</span> </div></li></ol></pre></body></html>
+int main(){
+    char op;
+    int x,y,z,r[1235],c[5679];
+    int revr[1235],revc[5679];
+    
+    for(int i = 1;i <= 1234;++i){
+        r[i] = i;
+        revr[i] = i;
+    }
+    
+    for(int i = 1;i <= 5678;++i){
+        c[i] = i;
+        revc[i] = i;
+    }
+    
+    while(~scanf(" %c",&op)){
+        if(op == 'R'){
+            scanf("%d %d",&x,&y);
+            
+            int r1 = r[x],r2 = r[y];
+            
+            r[x] = r2; revr[r2] = x;
+            r[y] = r1; revr[r1] = y;
+        }else if(op == 'C'){
+            scanf("%d %d",&x,&y);
+            
+            int c1 = c[x],c2 = c[y];
+            
+            c[x] = c2; revc[c2] = x;
+            c[y] = c1; revc[c1] = y;
+        }else if(op == 'Q'){
+            scanf("%d %d",&x,&y);
+            printf("%d\n",(r[x] - 1) * 5678 + c[y]);
+        }else{
+            scanf("%d",&z);
+            --z;
+            
+            x = z / 5678; y = z % 5678;
+            
+            printf("%d %d\n",revr[x + 1],revc[y + 1]);
+        }
+    }
+}

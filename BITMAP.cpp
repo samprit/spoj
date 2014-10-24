@@ -1,22 +1,93 @@
+//Includes
+#include <vector>
+#include <queue>
+#include <map>
+#include <set>
+#include <utility> //Pair
+#include <algorithm>
+#include <sstream> // istringstream>> ostring stream<<
+#include <iostream>
+#include <iomanip>
+#include <cstdio>
+#include <cmath>
+#include <cstdlib>
+#include <cassert>
+#include <ctime>
+#include <cstring>
+#include <limits>
+using namespace std;
+ 
+//M lazy ;)
+#define ll long long
+typedef istringstream iss;
+typedef ostringstream oss;
 
+#define ESP (1e-9)
+#define imax numeric_limits<int>::max()
+#define imin numeric_limits<int>::min()
+#define lmax numeric_limits<ll>::max()
+#define lmin numeric_limits<ll>::min()
+ 
+void assertOO(int a, int n, int b) {
+    assert( a <= n && n <= b );
+}
 
-<html><head><meta http-equiv='Content-Type' content='text/html; charset=iso-8859-2'><title>SPOJ submission 12639668 (C++ 4.3.2)</title><style type='text/css'><!--/* GeSHi (c) Nigel McNie 2004 (http://qbnz.com/highlighter) */
-.cpp  {color: #000066; border: 1px solid #d0d0d0; background-color: #f0f0f0;}
-.cpp a:link {color: #000060;}
-.cpp a:hover {background-color: #f0f000;}
-.cpp .head {font-family: Verdana, Arial, sans-serif; color: #808080; font-size: 70%; font-weight: bold; background-color: #f0f0ff; border-bottom: 1px solid #d0d0d0; padding: 2px;}
-.cpp .imp {font-weight: bold; color: red;}
-.cpp .kw1 {color: #0000ff;}
-.cpp .kw2 {color: #0000ff;}
-.cpp .kw3 {color: #0000dd;}
-.cpp .kw4 {color: #0000ff;}
-.cpp .co1 {color: #ff0000;}
-.cpp .co2 {color: #339900;}
-.cpp .coMULTI {color: #ff0000; font-style: italic;}
-.cpp .es0 {color: #666666; font-weight: bold;}
-.cpp .br0 {color: #000000;}
-.cpp .st0 {color: #666666;}
-.cpp .nu0 {color: #0000dd;}
-.cpp .me1 {color: #00eeff;}
-.cpp .me2 {color: #00eeff;}
---></style></head><body><pre class="cpp"><div class="head">SPOJ submission 12639668 (C++ 4.3.2) <a href='/files/src/save/12639668'>plaintext</a> <a href='/status/BITMAP,samprit/'>list</a>. Status: AC, problem BITMAP, contest SPOJ. By samprit (Samprit Biswas), 2014-10-16 05:46:07.</div><ol><li><div class="de1"><span class="co1">//Includes</span></div></li><li><div class="de1"><span class="co2">#include &lt;vector&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;queue&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;map&gt;</span></div></li><li class="li2"><div class="de2"><span class="co2">#include &lt;set&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;utility&gt; //Pair</span></div></li><li><div class="de1"><span class="co2">#include &lt;algorithm&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;sstream&gt; // istringstream&gt;&gt; ostring stream&lt;&lt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;iostream&gt;</span></div></li><li class="li2"><div class="de2"><span class="co2">#include &lt;iomanip&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;cstdio&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;cmath&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;cstdlib&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;cassert&gt;</span></div></li><li class="li2"><div class="de2"><span class="co2">#include &lt;ctime&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;cstring&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;limits&gt;</span></div></li><li><div class="de1"><span class="kw2">using</span> <span class="kw2">namespace</span> std;</div></li><li> </li><li class="li2"><div class="de2"><span class="co1">//M lazy ;)</span></div></li><li><div class="de1"><span class="co2">#define ll long long</span></div></li><li><div class="de1"><span class="kw4">typedef</span> istringstream iss;</div></li><li><div class="de1"><span class="kw4">typedef</span> ostringstream oss;</div></li><li><div class="de1">&nbsp;</div></li><li class="li2"><div class="de2"><span class="co2">#define ESP (1e-9)</span></div></li><li><div class="de1"><span class="co2">#define imax numeric_limits&lt;int&gt;::max()</span></div></li><li><div class="de1"><span class="co2">#define imin numeric_limits&lt;int&gt;::min()</span></div></li><li><div class="de1"><span class="co2">#define lmax numeric_limits&lt;ll&gt;::max()</span></div></li><li><div class="de1"><span class="co2">#define lmin numeric_limits&lt;ll&gt;::min()</span></div></li><li class="li2"> </li><li><div class="de1"><span class="kw4">void</span> assertOO<span class="br0">&#40;</span><span class="kw4">int</span> a, <span class="kw4">int</span> n, <span class="kw4">int</span> b<span class="br0">&#41;</span> <span class="br0">&#123;</span></div></li><li><div class="de1">    <a href="http://www.opengroup.org/onlinepubs/009695399/functions/assert.html"><span class="kw3">assert</span></a><span class="br0">&#40;</span> a &lt;= n &amp;&amp; n &lt;= b <span class="br0">&#41;</span>;</div></li><li><div class="de1"><span class="br0">&#125;</span></div></li><li><div class="de1">&nbsp;</div></li><li class="li2"><div class="de2"><span class="kw4">struct</span> node<span class="br0">&#123;</span></div></li><li><div class="de1">	ll <span class="kw4">int</span> x, y, dist;</div></li><li><div class="de1"><span class="br0">&#125;</span>;</div></li><li><div class="de1">&nbsp;</div></li><li><div class="de1"><span class="kw4">int</span> main<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li class="li2"><div class="de2">&nbsp;</div></li><li><div class="de1">	ll <span class="kw4">int</span> T, N, M, i, j,x,y;</div></li><li><div class="de1">	<a href="http://www.opengroup.org/onlinepubs/009695399/functions/scanf.html"><span class="kw3">scanf</span></a><span class="br0">&#40;</span><span class="st0">"%lld"</span>,&amp;T<span class="br0">&#41;</span>;</div></li><li><div class="de1">	<span class="kw4">int</span> neigX<span class="br0">&#91;</span><span class="br0">&#93;</span> = <span class="br0">&#123;</span>-<span class="nu0">1</span>,<span class="nu0">0</span>,<span class="nu0">0</span>,<span class="nu0">1</span><span class="br0">&#125;</span>;</div></li><li><div class="de1">	<span class="kw4">int</span> neigY<span class="br0">&#91;</span><span class="br0">&#93;</span> = <span class="br0">&#123;</span><span class="nu0">0</span>,-<span class="nu0">1</span>,+<span class="nu0">1</span>,<span class="nu0">0</span><span class="br0">&#125;</span>;</div></li><li class="li2"><div class="de2">&nbsp;</div></li><li><div class="de1">	<span class="kw1">while</span><span class="br0">&#40;</span>T--<span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">		<a href="http://www.opengroup.org/onlinepubs/009695399/functions/scanf.html"><span class="kw3">scanf</span></a><span class="br0">&#40;</span><span class="st0">"%lld %lld"</span>,&amp;N, &amp;M<span class="br0">&#41;</span>;</div></li><li><div class="de1">		<span class="kw4">char</span> arr<span class="br0">&#91;</span>N<span class="br0">&#93;</span><span class="br0">&#91;</span>M<span class="br0">&#93;</span>;</div></li><li><div class="de1">		ll <span class="kw4">int</span> dist<span class="br0">&#91;</span>N<span class="br0">&#93;</span><span class="br0">&#91;</span>M<span class="br0">&#93;</span>;</div></li><li class="li2"><div class="de2">&nbsp;</div></li><li><div class="de1">		queue&lt;struct node&gt; bfs;</div></li><li><div class="de1">		<span class="kw1">for</span><span class="br0">&#40;</span>i=<span class="nu0">0</span>;i&lt;N;i++<span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">			<a href="http://www.opengroup.org/onlinepubs/009695399/functions/scanf.html"><span class="kw3">scanf</span></a><span class="br0">&#40;</span><span class="st0">"%s"</span>,arr<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#41;</span>;</div></li><li><div class="de1">			<span class="kw1">for</span><span class="br0">&#40;</span>j=<span class="nu0">0</span>;j&lt;M;j++<span class="br0">&#41;</span> <span class="br0">&#123;</span></div></li><li class="li2"><div class="de2">				<span class="kw1">if</span><span class="br0">&#40;</span>arr<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span>==<span class="st0">'1'</span><span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">					<span class="kw4">struct</span> node temp;</div></li><li><div class="de1">					temp.<span class="me1">x</span> = i; temp.<span class="me1">y</span> = j;</div></li><li><div class="de1">					temp.<span class="me1">dist</span> = <span class="nu0">0</span>;</div></li><li><div class="de1">					bfs.<span class="me1">push</span><span class="br0">&#40;</span>temp<span class="br0">&#41;</span>;</div></li><li class="li2"><div class="de2">					dist<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span>=<span class="nu0">0</span>;</div></li><li><div class="de1">				<span class="br0">&#125;</span><span class="kw1">else</span><span class="br0">&#123;</span></div></li><li><div class="de1">					dist<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span>=imax;</div></li><li><div class="de1">				<span class="br0">&#125;</span></div></li><li><div class="de1">			<span class="br0">&#125;</span></div></li><li class="li2"><div class="de2">		<span class="br0">&#125;</span></div></li><li><div class="de1">		<span class="kw4">struct</span> node temp, push;</div></li><li><div class="de1">		<span class="kw1">while</span><span class="br0">&#40;</span>!bfs.<span class="me1">empty</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">			temp = bfs.<span class="me1">front</span><span class="br0">&#40;</span><span class="br0">&#41;</span>;</div></li><li><div class="de1">			bfs.<span class="me1">pop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>;</div></li><li class="li2"><div class="de2">&nbsp;</div></li><li><div class="de1">			<span class="kw1">for</span><span class="br0">&#40;</span>i=<span class="nu0">0</span>;i&lt;<span class="nu0">4</span>;i++<span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">				x = temp.<span class="me1">x</span> + neigX<span class="br0">&#91;</span>i<span class="br0">&#93;</span>;</div></li><li><div class="de1">				y = temp.<span class="me1">y</span> + neigY<span class="br0">&#91;</span>i<span class="br0">&#93;</span>;</div></li><li><div class="de1">&nbsp;</div></li><li class="li2"><div class="de2">				<span class="kw1">if</span><span class="br0">&#40;</span>x&gt;=<span class="nu0">0</span> &amp;&amp; x&lt;N &amp;&amp; y&gt;=<span class="nu0">0</span> &amp;&amp; y&lt;M &amp;&amp; dist<span class="br0">&#91;</span>x<span class="br0">&#93;</span><span class="br0">&#91;</span>y<span class="br0">&#93;</span>==imax<span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">					dist<span class="br0">&#91;</span>x<span class="br0">&#93;</span><span class="br0">&#91;</span>y<span class="br0">&#93;</span> = temp.<span class="me1">dist</span> + <span class="nu0">1</span>;</div></li><li><div class="de1">					push.<span class="me1">x</span> = x; push.<span class="me1">y</span> = y;</div></li><li><div class="de1">					push.<span class="me1">dist</span> = dist<span class="br0">&#91;</span>x<span class="br0">&#93;</span><span class="br0">&#91;</span>y<span class="br0">&#93;</span>;</div></li><li><div class="de1">					bfs.<span class="me1">push</span><span class="br0">&#40;</span>push<span class="br0">&#41;</span>;</div></li><li class="li2"><div class="de2">				<span class="br0">&#125;</span></div></li><li><div class="de1">			<span class="br0">&#125;</span></div></li><li><div class="de1">		<span class="br0">&#125;</span></div></li><li><div class="de1">&nbsp;</div></li><li><div class="de1">		<span class="kw1">for</span><span class="br0">&#40;</span>i=<span class="nu0">0</span>;i&lt;N;i++<span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li class="li2"><div class="de2">			<span class="kw1">for</span><span class="br0">&#40;</span>j=<span class="nu0">0</span>;j&lt;M;j++<span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">				<a href="http://www.opengroup.org/onlinepubs/009695399/functions/printf.html"><span class="kw3">printf</span></a><span class="br0">&#40;</span><span class="st0">"%lld "</span>, dist<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span><span class="br0">&#41;</span>;</div></li><li><div class="de1">			<span class="br0">&#125;</span></div></li><li><div class="de1">			<a href="http://www.opengroup.org/onlinepubs/009695399/functions/printf.html"><span class="kw3">printf</span></a><span class="br0">&#40;</span><span class="st0">"<span class="es0">\n</span>"</span><span class="br0">&#41;</span>;</div></li><li><div class="de1">		<span class="br0">&#125;</span></div></li><li class="li2"><div class="de2">	<span class="br0">&#125;</span></div></li><li><div class="de1">&nbsp;</div></li><li><div class="de1">	<span class="kw1">return</span> <span class="nu0">0</span>;</div></li><li><div class="de1"><span class="br0">&#125;</span> </div></li></ol></pre></body></html>
+struct node{
+	ll int x, y, dist;
+};
+
+int main(){
+
+	ll int T, N, M, i, j,x,y;
+	scanf("%lld",&T);
+	int neigX[] = {-1,0,0,1};
+	int neigY[] = {0,-1,+1,0};
+
+	while(T--){
+		scanf("%lld %lld",&N, &M);
+		char arr[N][M];
+		ll int dist[N][M];
+
+		queue<struct node> bfs;
+		for(i=0;i<N;i++){
+			scanf("%s",arr[i]);
+			for(j=0;j<M;j++) {
+				if(arr[i][j]=='1'){
+					struct node temp;
+					temp.x = i; temp.y = j;
+					temp.dist = 0;
+					bfs.push(temp);
+					dist[i][j]=0;
+				}else{
+					dist[i][j]=imax;
+				}
+			}
+		}
+		struct node temp, push;
+		while(!bfs.empty()){
+			temp = bfs.front();
+			bfs.pop();
+
+			for(i=0;i<4;i++){
+				x = temp.x + neigX[i];
+				y = temp.y + neigY[i];
+
+				if(x>=0 && x<N && y>=0 && y<M && dist[x][y]==imax){
+					dist[x][y] = temp.dist + 1;
+					push.x = x; push.y = y;
+					push.dist = dist[x][y];
+					bfs.push(push);
+				}
+			}
+		}
+
+		for(i=0;i<N;i++){
+			for(j=0;j<M;j++){
+				printf("%lld ", dist[i][j]);
+			}
+			printf("\n");
+		}
+	}
+
+	return 0;
+}

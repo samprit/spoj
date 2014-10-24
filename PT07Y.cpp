@@ -1,22 +1,111 @@
+#include <iostream>
+#include <cstdio>
+#include <string>
+#include <queue>
+#include <stack>
+#include <algorithm>
+#include <cmath>
+#include <map>
 
+#define ll long long
+#define ull unsigned long long
 
-<html><head><meta http-equiv='Content-Type' content='text/html; charset=iso-8859-2'><title>SPOJ submission 12541554 (C++ 4.3.2)</title><style type='text/css'><!--/* GeSHi (c) Nigel McNie 2004 (http://qbnz.com/highlighter) */
-.cpp  {color: #000066; border: 1px solid #d0d0d0; background-color: #f0f0f0;}
-.cpp a:link {color: #000060;}
-.cpp a:hover {background-color: #f0f000;}
-.cpp .head {font-family: Verdana, Arial, sans-serif; color: #808080; font-size: 70%; font-weight: bold; background-color: #f0f0ff; border-bottom: 1px solid #d0d0d0; padding: 2px;}
-.cpp .imp {font-weight: bold; color: red;}
-.cpp .kw1 {color: #0000ff;}
-.cpp .kw2 {color: #0000ff;}
-.cpp .kw3 {color: #0000dd;}
-.cpp .kw4 {color: #0000ff;}
-.cpp .co1 {color: #ff0000;}
-.cpp .co2 {color: #339900;}
-.cpp .coMULTI {color: #ff0000; font-style: italic;}
-.cpp .es0 {color: #666666; font-weight: bold;}
-.cpp .br0 {color: #000000;}
-.cpp .st0 {color: #666666;}
-.cpp .nu0 {color: #0000dd;}
-.cpp .me1 {color: #00eeff;}
-.cpp .me2 {color: #00eeff;}
---></style></head><body><pre class="cpp"><div class="head">SPOJ submission 12541554 (C++ 4.3.2) <a href='/files/src/save/12541554'>plaintext</a> <a href='/status/PT07Y,samprit/'>list</a>. Status: AC, problem PT07Y, contest SPOJ. By samprit (Samprit Biswas), 2014-10-04 16:11:06.</div><ol><li><div class="de1"><span class="co2">#include &lt;iostream&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;cstdio&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;string&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;queue&gt;</span></div></li><li class="li2"><div class="de2"><span class="co2">#include &lt;stack&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;algorithm&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;cmath&gt;</span></div></li><li><div class="de1"><span class="co2">#include &lt;map&gt;</span></div></li><li><div class="de1">&nbsp;</div></li><li class="li2"><div class="de2"><span class="co2">#define ll long long</span></div></li><li><div class="de1"><span class="co2">#define ull unsigned long long</span></div></li><li><div class="de1">&nbsp;</div></li><li><div class="de1"><span class="kw2">using</span> <span class="kw2">namespace</span> std;</div></li><li><div class="de1">&nbsp;</div></li><li class="li2"><div class="de2"><span class="kw4">struct</span> Edge<span class="br0">&#123;</span></div></li><li><div class="de1">	<span class="kw4">int</span> src, dest;</div></li><li><div class="de1"><span class="br0">&#125;</span>;</div></li><li><div class="de1">&nbsp;</div></li><li><div class="de1"><span class="kw4">struct</span> subset</div></li><li class="li2"><div class="de2"><span class="br0">&#123;</span></div></li><li><div class="de1">    <span class="kw4">int</span> parent;</div></li><li><div class="de1">    <span class="kw4">int</span> rank;</div></li><li><div class="de1"><span class="br0">&#125;</span>;</div></li><li>  </li><li class="li2"><div class="de2"><span class="co1">// A utility function to find set of an element i</span></div></li><li><div class="de1"><span class="co1">// (uses path compression technique)</span></div></li><li><div class="de1"><span class="kw4">int</span> find<span class="br0">&#40;</span><span class="kw4">struct</span> subset subsets<span class="br0">&#91;</span><span class="br0">&#93;</span>, <span class="kw4">int</span> i<span class="br0">&#41;</span></div></li><li><div class="de1"><span class="br0">&#123;</span></div></li><li><div class="de1">    <span class="co1">// find root and make root as parent of i (path compression)</span></div></li><li class="li2"><div class="de2">    <span class="kw1">if</span> <span class="br0">&#40;</span>subsets<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">parent</span> != i<span class="br0">&#41;</span></div></li><li><div class="de1">        subsets<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">parent</span> = find<span class="br0">&#40;</span>subsets, subsets<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">parent</span><span class="br0">&#41;</span>;</div></li><li> </li><li><div class="de1">    <span class="kw1">return</span> subsets<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">parent</span>;</div></li><li><div class="de1"><span class="br0">&#125;</span></div></li><li class="li2"> </li><li><div class="de1"><span class="co1">// A function that does union of two sets of x and y</span></div></li><li><div class="de1"><span class="co1">// (uses union by rank)</span></div></li><li><div class="de1"><span class="kw4">void</span> <span class="kw4">Union</span><span class="br0">&#40;</span><span class="kw4">struct</span> subset subsets<span class="br0">&#91;</span><span class="br0">&#93;</span>, <span class="kw4">int</span> x, <span class="kw4">int</span> y<span class="br0">&#41;</span></div></li><li><div class="de1"><span class="br0">&#123;</span></div></li><li class="li2"><div class="de2">    <span class="kw4">int</span> xroot = find<span class="br0">&#40;</span>subsets, x<span class="br0">&#41;</span>;</div></li><li><div class="de1">    <span class="kw4">int</span> yroot = find<span class="br0">&#40;</span>subsets, y<span class="br0">&#41;</span>;</div></li><li> </li><li><div class="de1">    <span class="co1">// Attach smaller rank tree under root of high rank tree</span></div></li><li><div class="de1">    <span class="co1">// (Union by Rank)</span></div></li><li class="li2"><div class="de2">    <span class="kw1">if</span> <span class="br0">&#40;</span>subsets<span class="br0">&#91;</span>xroot<span class="br0">&#93;</span>.<span class="me1">rank</span> &lt; subsets<span class="br0">&#91;</span>yroot<span class="br0">&#93;</span>.<span class="me1">rank</span><span class="br0">&#41;</span></div></li><li><div class="de1">        subsets<span class="br0">&#91;</span>xroot<span class="br0">&#93;</span>.<span class="me1">parent</span> = yroot;</div></li><li><div class="de1">    <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>subsets<span class="br0">&#91;</span>xroot<span class="br0">&#93;</span>.<span class="me1">rank</span> &gt; subsets<span class="br0">&#91;</span>yroot<span class="br0">&#93;</span>.<span class="me1">rank</span><span class="br0">&#41;</span></div></li><li><div class="de1">        subsets<span class="br0">&#91;</span>yroot<span class="br0">&#93;</span>.<span class="me1">parent</span> = xroot;</div></li><li> </li><li class="li2"><div class="de2">    <span class="co1">// If ranks are same, then make one as root and increment</span></div></li><li><div class="de1">    <span class="co1">// its rank by one</span></div></li><li><div class="de1">    <span class="kw1">else</span></div></li><li><div class="de1">    <span class="br0">&#123;</span></div></li><li><div class="de1">        subsets<span class="br0">&#91;</span>yroot<span class="br0">&#93;</span>.<span class="me1">parent</span> = xroot;</div></li><li class="li2"><div class="de2">        subsets<span class="br0">&#91;</span>xroot<span class="br0">&#93;</span>.<span class="me1">rank</span>++;</div></li><li><div class="de1">    <span class="br0">&#125;</span></div></li><li><div class="de1"><span class="br0">&#125;</span></div></li><li> </li><li><div class="de1"><span class="co1">// The main function to check whether a given graph contains cycle or not</span></div></li><li class="li2"><div class="de2"><span class="kw4">bool</span> isCycle<span class="br0">&#40;</span> <span class="kw4">int</span> V, <span class="kw4">int</span> E,  <span class="kw4">struct</span> Edge edge<span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#41;</span></div></li><li><div class="de1"><span class="br0">&#123;</span></div></li><li><div class="de1">    <span class="co1">// Allocate memory for creating V sets</span></div></li><li><div class="de1">    <span class="kw4">struct</span> subset subsets<span class="br0">&#91;</span>V<span class="br0">&#93;</span>;</div></li><li> </li><li class="li2"><div class="de2">    <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> v = <span class="nu0">0</span>; v &lt; V; ++v<span class="br0">&#41;</span></div></li><li><div class="de1">    <span class="br0">&#123;</span></div></li><li><div class="de1">        subsets<span class="br0">&#91;</span>v<span class="br0">&#93;</span>.<span class="me1">parent</span> = v;</div></li><li><div class="de1">        subsets<span class="br0">&#91;</span>v<span class="br0">&#93;</span>.<span class="me1">rank</span> = <span class="nu0">0</span>;</div></li><li><div class="de1">    <span class="br0">&#125;</span></div></li><li class="li2"> </li><li><div class="de1">    <span class="co1">// Iterate through all edges of graph, find sets of both</span></div></li><li><div class="de1">    <span class="co1">// vertices of every edge, if sets are same, then there is</span></div></li><li><div class="de1">    <span class="co1">// cycle in graph.</span></div></li><li><div class="de1">    <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> e = <span class="nu0">0</span>; e &lt; E; ++e<span class="br0">&#41;</span></div></li><li class="li2"><div class="de2">    <span class="br0">&#123;</span></div></li><li><div class="de1">        <span class="kw4">int</span> x = find<span class="br0">&#40;</span>subsets, edge<span class="br0">&#91;</span>e<span class="br0">&#93;</span>.<span class="me1">src</span><span class="br0">&#41;</span>;</div></li><li><div class="de1">        <span class="kw4">int</span> y = find<span class="br0">&#40;</span>subsets, edge<span class="br0">&#91;</span>e<span class="br0">&#93;</span>.<span class="me1">dest</span><span class="br0">&#41;</span>;</div></li><li> </li><li><div class="de1">        <span class="kw1">if</span> <span class="br0">&#40;</span>x == y<span class="br0">&#41;</span></div></li><li class="li2"><div class="de2">            <span class="kw1">return</span> <span class="kw2">true</span>;</div></li><li> </li><li><div class="de1">        <span class="kw4">Union</span><span class="br0">&#40;</span>subsets, x, y<span class="br0">&#41;</span>;</div></li><li><div class="de1">    <span class="br0">&#125;</span></div></li><li><div class="de1">    <span class="kw1">return</span> <span class="kw2">false</span>;</div></li><li class="li2"><div class="de2"><span class="br0">&#125;</span></div></li><li><div class="de1">&nbsp;</div></li><li><div class="de1"><span class="kw4">int</span> main<span class="br0">&#40;</span><span class="br0">&#41;</span></div></li><li><div class="de1"><span class="br0">&#123;</span></div></li><li><div class="de1">	<span class="kw4">int</span> i;</div></li><li class="li2"><div class="de2">	<span class="kw4">int</span> V, E;</div></li><li><div class="de1">	cin&gt;&gt;V&gt;&gt;E;</div></li><li><div class="de1">&nbsp;</div></li><li><div class="de1">	<span class="kw4">struct</span> Edge edge<span class="br0">&#91;</span>E<span class="br0">&#93;</span>;</div></li><li><div class="de1">	<span class="kw1">for</span><span class="br0">&#40;</span>i=<span class="nu0">0</span>;i&lt;E;i++<span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li class="li2"><div class="de2">		cin&gt;&gt;edge<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">src</span>&gt;&gt;edge<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">dest</span>;</div></li><li><div class="de1">		edge<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">src</span>--;</div></li><li><div class="de1">		edge<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">dest</span>--;</div></li><li><div class="de1">	<span class="br0">&#125;</span></div></li><li><div class="de1">&nbsp;</div></li><li class="li2"><div class="de2">	<span class="kw1">if</span><span class="br0">&#40;</span>V!=E+<span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li><div class="de1">		cout&lt;&lt;<span class="st0">"NO<span class="es0">\n</span>"</span>;</div></li><li><div class="de1">		<span class="kw1">return</span> <span class="nu0">0</span>;</div></li><li><div class="de1">	<span class="br0">&#125;</span></div></li><li><div class="de1">	<span class="kw1">if</span><span class="br0">&#40;</span>isCycle<span class="br0">&#40;</span>V,E,edge<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span></div></li><li class="li2"><div class="de2">		cout&lt;&lt;<span class="st0">"NO<span class="es0">\n</span>"</span>;</div></li><li><div class="de1">	<span class="br0">&#125;</span><span class="kw1">else</span><span class="br0">&#123;</span></div></li><li><div class="de1">		cout&lt;&lt;<span class="st0">"YES<span class="es0">\n</span>"</span>;</div></li><li><div class="de1">	<span class="br0">&#125;</span></div></li><li><div class="de1">&nbsp;</div></li><li class="li2"><div class="de2">    <span class="kw1">return</span> <span class="nu0">0</span>;</div></li><li><div class="de1"><span class="br0">&#125;</span> </div></li></ol></pre></body></html>
+using namespace std;
+
+struct Edge{
+	int src, dest;
+};
+
+struct subset
+{
+    int parent;
+    int rank;
+};
+  
+// A utility function to find set of an element i
+// (uses path compression technique)
+int find(struct subset subsets[], int i)
+{
+    // find root and make root as parent of i (path compression)
+    if (subsets[i].parent != i)
+        subsets[i].parent = find(subsets, subsets[i].parent);
+ 
+    return subsets[i].parent;
+}
+ 
+// A function that does union of two sets of x and y
+// (uses union by rank)
+void Union(struct subset subsets[], int x, int y)
+{
+    int xroot = find(subsets, x);
+    int yroot = find(subsets, y);
+ 
+    // Attach smaller rank tree under root of high rank tree
+    // (Union by Rank)
+    if (subsets[xroot].rank < subsets[yroot].rank)
+        subsets[xroot].parent = yroot;
+    else if (subsets[xroot].rank > subsets[yroot].rank)
+        subsets[yroot].parent = xroot;
+ 
+    // If ranks are same, then make one as root and increment
+    // its rank by one
+    else
+    {
+        subsets[yroot].parent = xroot;
+        subsets[xroot].rank++;
+    }
+}
+ 
+// The main function to check whether a given graph contains cycle or not
+bool isCycle( int V, int E,  struct Edge edge[])
+{
+    // Allocate memory for creating V sets
+    struct subset subsets[V];
+ 
+    for (int v = 0; v < V; ++v)
+    {
+        subsets[v].parent = v;
+        subsets[v].rank = 0;
+    }
+ 
+    // Iterate through all edges of graph, find sets of both
+    // vertices of every edge, if sets are same, then there is
+    // cycle in graph.
+    for(int e = 0; e < E; ++e)
+    {
+        int x = find(subsets, edge[e].src);
+        int y = find(subsets, edge[e].dest);
+ 
+        if (x == y)
+            return true;
+ 
+        Union(subsets, x, y);
+    }
+    return false;
+}
+
+int main()
+{
+	int i;
+	int V, E;
+	cin>>V>>E;
+
+	struct Edge edge[E];
+	for(i=0;i<E;i++){
+		cin>>edge[i].src>>edge[i].dest;
+		edge[i].src--;
+		edge[i].dest--;
+	}
+
+	if(V!=E+1){
+		cout<<"NO\n";
+		return 0;
+	}
+	if(isCycle(V,E,edge)){
+		cout<<"NO\n";
+	}else{
+		cout<<"YES\n";
+	}
+
+    return 0;
+}
